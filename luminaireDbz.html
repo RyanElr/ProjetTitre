@@ -20,10 +20,8 @@
   <link rel="stylesheet" href="assets/css/style2.css" />
 </head>
 <body>
-
   <div id="body"class="container-fluid">
     <!-- Tête d'affiche -->
-    <script src="assets/js/script.js"></script>
       <div class="ec1">
         <div class="row test3 d-flex justify-content-center">
         <!--NavBar -->
@@ -55,13 +53,13 @@
                   </div>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a href="luminaire.html" class="nav-link" id="navbarDropdownMenuLink" >
                     Luminaire
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="index2.html">Dragon Ball</a>
-                    <a class="dropdown-item" href="index3.html">Naruto</a>
-                    <a class="dropdown-item" href="#">One piece</a>
+                    <a class="dropdown-item" id="LinkDragon" href="#">Dragon Ball</a>
+                    <a class="dropdown-item" id="LinkNaruto" href="#">Naruto</a>
+                    <a class="dropdown-item" id="LinkOnePiece" href="#">One piece</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -69,12 +67,11 @@
                     Figurines
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Dragon Ball</a>
-                    <a class="dropdown-item" href="#">Naruto</a>
-                    <a class="dropdown-item" href="#">One Piece</a>
+                    <a class="dropdown-item" href="figurinedbz.html">Dragon Ball</a>
+                    <a class="dropdown-item" href="figurinenaruto.html">Naruto</a>
+                    <a class="dropdown-item" href="figurineonepiece.html">One Piece</a>
                     <a class="dropdown-item" href="#">My Hero Academia</a>
-                    <a class="dropdown-item" href="#">Seven Deadly Sins</a>
-                    <a class="dropdown-item" href="#">Tokyo Ghoul</a>
+
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -98,13 +95,12 @@
                     <a class="dropdown-item" href="#">Mug</a>
                     <a class="dropdown-item" href="#">Tapis de souris</a>
                     <a class="dropdown-item" href="#">Coussins</a>
-                </li>
               </li>
-              <a class="nav-link" href="#">
+            </div>
+              <a class="nav-link" href="login.php">
                 Log In
 
               </a>
-            </div>
               <a class="nav-link" href="#">
                 Register
               </a>
@@ -135,9 +131,9 @@
     </div>
     <!-- Caroussel-->
 <div class="container pt-3">
-      <div class="row justify-content-between">
+      <div class="row justify-content-between luminairedbz">
         <div class="col-md-5 shadow p-3 mb-5 bg-black rounded">
-          <img class="imgcoque" src="assets/img/shenron.png" height="300" />
+          <img id="zoom" class="imgcoque" src="assets/img/shenron.png" height="300" />
           <div class="card-body">
             <h2 class="card-text">102.99€</h2>
             <p class="card-text">Shenron 7 boules de cristal</p>
@@ -145,16 +141,15 @@
           </div>
         </div>
         <div class="col-md-5 shadow p-3 mb-5 bg-black rounded">
-          <img class="imgcoque" src="assets/img/goku vs vegeta.jpg" height="300" />
+          <img id="zoom" class="imgcoque" src="assets/img/goku vs vegeta.jpg" height="300" />
           <div class="card-body">
             <h2 class="card-text">107.99€</h2>
             <p class="card-text">Vegeta & Goku</p>
             <button type="button" id="n1" class="btn btn-outline-primary btn-lg w-100">AJOUTER AU PANIER</button>
           </div>
         </div>
-      <div class="row justify-content-between">
         <div class="col-md-5 shadow p-3 mb-5 bg-black rounded">
-          <img class="imgcoque" src="assets/img/broly vs goku.jpg" height="300"/>
+          <img id="zoom" class="imgcoque" src="assets/img/broly vs goku.jpg" height="300"/>
           <div class="card-body">
             <h2 class="card-text">139.99€</h2>
             <p class="card-text">Broly vs Goku</p>
@@ -162,16 +157,15 @@
           </div>
         </div>
         <div class="col-md-5 shadow p-3 mb-5 bg-black rounded">
-          <img class="imgcoque" src="assets/img/goku vs freezer.jpg" height="300"/>
+          <img id="zoom" class="imgcoque" src="assets/img/goku vs freezer.jpg" height="300"/>
           <div class="card-body">
             <h2 class="card-text">102.99€</h2>
             <p class="card-text">Goku vs Freezer</p>
             <button type="button" id="n1" class="btn btn-outline-primary btn-lg w-100">AJOUTER AU PANIER</button>
           </div>
         </div>
-      </di<div class="row justify-content-between">
         <div class="col-md-5 shadow p-3 mb-5 bg-black rounded">
-          <img class="imgcoque" src="assets/img/gohan.jpg" height="300"/>
+          <img id="zoom" class="imgcoque" src="assets/img/gohan.jpg" height="300"/>
           <div class="card-body">
             <h2 class="card-text">79.99€</h2>
             <p class="card-text">Gohan SSJ2</p>
@@ -179,7 +173,7 @@
           </div>
         </div>
         <div class="col-md-5 col-sm-9 shadow p-3 mb-5 bg-black rounded">
-          <img class="imgcoque" src="assets/img/cell.jpg" height="300"/>
+          <img id="zoom" class="imgcoque" src="assets/img/cell.jpg" height="300"/>
           <div class="card-body">
             <h2 class="card-text">79.99€</h2>
             <p class="card-text">Cell</p>
@@ -187,8 +181,8 @@
           </div>
         </div>
       </div>
-      </div>
     </div>
-  </div>
-    </body>
-    </html>
+</div>
+<script src="assets/js/script.js"></script>
+  </body>
+  </html>

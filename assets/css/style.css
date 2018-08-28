@@ -1,7 +1,8 @@
 body{
   background-color: black;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Merienda', cursive;
   font-weight: bold;
+
 }
 .container-fluid{
   width: 100%
@@ -27,7 +28,7 @@ nav{
     font-size: 25px;
   }
   .navbar-nav{
-    padding-left: 5em;
+    padding-left: 2em;
     font-size: 1.1em;
     font-weight: 200;
   }
@@ -35,106 +36,133 @@ nav{
     background-color: #b30000;
     color: black;
   }
-.dropdown-menu{
-  background-color: #800000;
-  border-right: 1px solid black;
-}
-.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0;
-  border-radius:0;
- }
- .dropdown-item{
-   color: white;
- }
- .dropdown-item:hover{
-   color: white;
-   background-color: #072F54;
- }
-
- .ec1{
-   width: 100%;
-   top:0;
-   z-index:1000;
-   background-image:url(../img/739916-awesome-background-images.jpg) ;
-   margin: 0;
- }
-.icon{
-  background-color: #333333;
-  padding: 5px 5px 5px 0;
-}
-.form-control, .icon{
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-}
-input[type=search]{
-  background-color: #333333;
-}
-input[type=search]:focus{
-  background-color: #333333;
-}
-
-@media all and (max-width: 1322px){
-
-  .navbar-header{
-    padding: 0;
-    height: 100px;
+  .dropdown-menu{
+    background-color: #800000;
+    border-right: 1px solid black;
   }
-  .nav-link{
-    padding: 5px;
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+    border-radius:0;
   }
-  .nav-link:hover{
-    background-color: #b30000;
+  .dropdown-item{
+    color: white;
+  }
+  .dropdown-item:hover{
+    color: white;
+    background-color: #072F54;
+  }
 
+  .ec1{
+    width: 100%;
+    top:0;
+    z-index:1000;
+    background-image:url(../img/739916-awesome-background-images.jpg) ;
+    margin: 0;
   }
-  .blocLienFooter{
-    padding-left: 0;
+  .icon{
+    background-color: #333333;
+    padding: 5px 5px 5px 0;
   }
-}
-.nv2{
-  position: absolute;
-}
-#myBtn{right: 0;
-  color:white;
-  background-color: inherit;
-  border-style: none;
-}
-/*css contenu audrey*/
+  .form-control, .icon{
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+  }
+  input[type=search]{
+    background-color: #333333;
+  }
+  input[type=search]:focus{
+    background-color: #333333;
+  }
 
-.imgcoque{
-  padding-top: 10px;
-  display: flex;
-  margin: auto;
-}
-.card-text{
-  color:white;
-  text-align: center;
-}
-/*fin css contenu audrey*/
-#n1{
-  border-radius: 0;
-  color: red;
-  border-color: inherit;
-}
-#n1:hover{
-  background-color:red;
-  color:white;
-  border-style: none;
-}
-#Img1{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-#imgManga{
-  margin-left: auto;
-  margin-right: auto;
-}
-#carousel{
-  margin-left: auto;
-  margin-right: auto;
-}
-#goku{
-  width: 1100px;
-}
+  @media all and (max-width: 1322px){
+
+    .navbar-header{
+      padding: 0;
+      height: 100px;
+    }
+    .nav-link{
+      padding: 5px;
+    }
+    .nav-link:hover{
+      background-color: #b30000;
+
+    }
+    .blocLienFooter{
+      padding-left: 0;
+    }
+  }
+  .nv2{
+    position: absolute;
+  }
+  #myBtn{right: 0;
+    color:white;
+    background-color: inherit;
+    border-style: none;
+  }
+
+  .card-text{
+    color:white;
+    text-align: center;
+  }
+  #n1{
+    border-radius: 0;
+    color: red;
+    border-color: inherit;
+  }
+  #n1:hover{
+    background-color:red;
+    color:white;
+    border-style: none;
+  }
+  #Img1{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    transform: transition .2s;
+  }
+  #imgManga{
+    margin-left: auto;
+    margin-right: auto;
+    transform: transition .2s;
+    border-radius: 10%;
+  }
+    #imgManga:hover{
+      margin-left: auto;
+      margin-right: auto;
+      transition: transform .2s;
+    }
+    #carousel{
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h3{
+      text-align: center;
+      color: White;
+      font-size: 50px;
+
+    }
+    #zoom{transition: transform .3s;
+      border-radius: 20%;
+    }
+    #zoom:hover{
+      transform: scale(1.15);
+    }
+    #btn7{
+      display: inline;
+      position: fixed;
+      right:0;
+      z-index: 10;
+      margin-bottom: 0;
+    }
+    footer{
+      color:white;
+    }
+    form{
+        color : white;
+        text-align:  center;
+    }
+    input{
+        color: black;
+    }
