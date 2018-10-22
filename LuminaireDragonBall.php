@@ -9,8 +9,8 @@ include'controller/controller.php';
         <!-- Caroussel-->   
         <div class="container">
                 <div class="row justify-content-between">
-            <?php foreach ($luminaryList as $luminaire) { ?>
-                    <div class="col-md-5 col-sm-6 col-xs-6 shadow p-3 mb-5 bg-black rounded">
+            <?php foreach ($luminaryDragonBallList as $luminaire) { ?>
+                    <div class="col-5 shadow p-3 mb-5 bg-black rounded">
                         <img id="zoom" class="cardManga" src="assets/img/<?= $luminaire->imgUrl?>" height="300"/>
                         <div class="card-body"><h2 class="card-text"><?= $luminaire->title ?></h2></div>
                         <div class="card-body"><p class="card-text"><?= $luminaire->price ?>€</p></div>

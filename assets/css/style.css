@@ -1,168 +1,179 @@
 body{
-  background-color: black;
-  font-family: 'Merienda', cursive;
-  font-weight: bold;
+    background-color: black;
+    font-family: 'Merienda', cursive;
+    font-weight: bold;
 
 }
+/* Taille du container */
 .container-fluid{
-  width: 100%
+    width: 100%
 }
+/* Style de la navbar */
 nav{
-  z-index:100;
-  margin: auto;
+
+    z-index:100;
+    margin: auto;
+    transition: 0.2s;
 }
 /* Navbar style */
 .navbar{
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
 .navbar-header{
-  padding-top: 2px;
-  height: 20px;
+    padding-top: 2px;
+    height: 20px;
 }
 .nav-link{
-  color: white;}
-  .nav-link{
+    color: white;}
+.nav-link{
     padding: 30px 0;
     color:white;
     font-size: 25px;
-  }
-  .navbar-nav{
+}
+.navbar-nav{
     padding-left: 2em;
     font-size: 1.1em;
     font-weight: 200;
-  }
-  .nav-link:hover{
+}
+/*Passage sur la navbar.*/
+
+.nav-link:hover{
+
     background-color: #b30000;
     color: black;
-  }
-  .dropdown-menu{
+}
+.dropdown-menu{
+    border-radius: 10%;
     background-color: #800000;
     border-right: 1px solid black;
-  }
-  .dropdown:hover .dropdown-menu {
+}
+.dropdown:hover .dropdown-menu {
+    border-radius: 10%;
     display: block;
     margin-top: 0;
     border-radius:0;
-  }
-  .dropdown-item{
+}
+.dropdown-item{
     color: white;
-  }
-  .dropdown-item:hover{
+}
+.dropdown-item:hover{
+    border-radius: 10%;
     color: white;
     background-color: #072F54;
-  }
+}
 
-  .ec1{
+.ec1{
     width: 100%;
     top:0;
     z-index:1000;
     background-image:url(../img/739916-awesome-background-images.jpg) ;
     margin: 0;
-  }
-  .icon{
+}
+.icon{
     background-color: #333333;
     padding: 5px 5px 5px 0;
-  }
-  .form-control, .icon{
+}
+.form-control, .icon{
     border: none;
     box-shadow: none;
-    border-radius: 0;
-  }
-  input[type=search]{
-    background-color: #333333;
-  }
-  input[type=search]:focus{
-    background-color: #333333;
-  }
+}
 
-  @media all and (max-width: 1322px){
+@media all and (max-width: 1322px){
 
     .navbar-header{
-      padding: 0;
-      height: 100px;
+        padding: 0;
+        height: 100px;
     }
     .nav-link{
-      padding: 5px;
+        padding: 5px;
     }
     .nav-link:hover{
-      background-color: #b30000;
+        background-color: #b30000;
 
     }
     .blocLienFooter{
-      padding-left: 0;
+        padding-left: 0;
     }
-  }
-  .nv2{
+}
+.nv2{
     position: absolute;
-  }
-  #myBtn{right: 0;
-    color:white;
-    background-color: inherit;
-    border-style: none;
-  }
+}
+#myBtn{right: 0;
+       color:white;
+       background-color: inherit;
+       border-style: none;
+}
 
-  .card-text{
+.card-text{
     color:white;
     text-align: center;
-  }
-  #n1{
+}
+#n1{
     border-radius: 0;
     color: red;
     border-color: inherit;
-  }
-  #n1:hover{
+}
+#n1:hover{
     background-color:red;
     color:white;
     border-style: none;
-  }
-  #Img1{
+}
+#Img1{
+
     display: block;
     margin-left: auto;
     margin-right: auto;
     transform: transition .2s;
-  }
-  #imgManga{
+}
+#imgManga{
     margin-left: auto;
     margin-right: auto;
     transform: transition .2s;
     border-radius: 10%;
-  }
-    #imgManga:hover{
-      margin-left: auto;
-      margin-right: auto;
-      transition: transform .2s;
-    }
-    #carousel{
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h3{
-      text-align: center;
-      color: White;
-      font-size: 50px;
+}
+#imgManga:hover{
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform .2s;
+}
+#carousel{
+    margin-left: auto;
+    margin-right: auto;
+}
+h3{
+    text-align: center;
+    color: White;
+    font-size: 50px;
+}
+.cardManga:hover{
+    transform: scale(1.10);
+}
+#btn7{
+    bottom: 0;
+    display: block;
+    position:fixed;
+    right:0;
+    z-index: 10;
+    margin-bottom: 0;
+}
+footer{
+    color:white;
+}
+form{
+    color : white;
+    text-align:  center;
+}
 
+.cardManga{
+    transition: transform .3s;
+    border-radius: 20%;
+    display: flex;
+    margin: auto;
+    .cardManga:hover{
+        transform: scale(1.10);
     }
-    #zoom{transition: transform .3s;
-      border-radius: 20%;
-    }
-    #zoom:hover{
-      transform: scale(1.15);
-    }
-    #btn7{
-      display: inline;
-      position: fixed;
-      right:0;
-      z-index: 10;
-      margin-bottom: 0;
-    }
-    footer{
-      color:white;
-    }
-    form{
-        color : white;
-        text-align:  center;
-    }
-    input{
-        color: black;
-    }
+}
+#btn8{
+    width:100px;
+}
