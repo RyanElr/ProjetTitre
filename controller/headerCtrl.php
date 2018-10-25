@@ -8,13 +8,6 @@ if (isset($_GET['action'])) {
         header('location:index.php');
     }
 }
-if (isset($_POST['search'])){
-        $produits->search = $_POST['search'];
-        $showPatientsList = $produits->getLuminaryList();
-    } else {
-        $showPatientsList = $produits->getFigureList();
-    }
-
 //choix de la langue
 if (!empty($_GET['lang'])) {
     //on enregistre la langue de l'utilisateur

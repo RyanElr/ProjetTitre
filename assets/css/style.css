@@ -170,10 +170,22 @@ form{
     border-radius: 20%;
     display: flex;
     margin: auto;
-    .cardManga:hover{
-        transform: scale(1.10);
-    }
 }
 #btn8{
     width:100px;
+}
+@media (max-width: 932px){
+    .cardManga{
+    transition:none;
+    border-radius: 20%;
+    display: flex;
+    margin: auto;
+}
+.cardManga:hover{
+    transform: none;
+}
+}
+.figurineList{
+    margin-left: auto;
+    margin-right: auto ;
 }

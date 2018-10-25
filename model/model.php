@@ -150,7 +150,7 @@ class produits{
             $result = array();
         $remove = $this->connexion->prepare('SELECT `id`, `title`, `price` FROM `DFD54Z_products` '
                 . 'WHERE `title`');
-        $remove->bindValue('title', '%' . $this->search . '%', PDO::PARAM_STR);
+        $remove->bindValue('title', '%' . $this->search , PDO::PARAM_STR);
    if ($remove->execute()) {
             $result = $remove->fetchAll(PDO::FETCH_OBJ);
         }

@@ -8,7 +8,7 @@ include'controller/controller.php';
   <div class="container">
                 <div class="row justify-content-between">
             <?php foreach ($figureList as $figure) { ?>
-                    <div class="col-5 shadow p-3 mb-5 bg-black rounded">
+                    <div class="col-md-5 col-sm-5 col-xs-5 shadow  mb-5 bg-black rounded">
                         <img id="zoom" class="cardManga" src="assets/img/<?= $figure->imgUrl?>" height="300"/>
                         <div class="card-body"><h2 class="card-text"><?= $figure->title ?></h2></div>
                         <div class="card-body"><p class="card-text"><?= $figure->price ?> €</p></div>
