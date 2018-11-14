@@ -113,6 +113,7 @@ nav{
     border-radius: 0;
     color: red;
     border-color: inherit;
+    width : 100%;
 }
 #n1:hover{
     background-color:red;
@@ -132,14 +133,10 @@ nav{
     transform: transition .2s;
     border-radius: 10%;
 }
-#imgManga:hover{
-    margin-left: auto;
-    margin-right: auto;
-    transition: transform .2s;
-}
-#carousel{
-    margin-left: auto;
-    margin-right: auto;
+@media (max-width: 932px){
+    #imgManga{
+        width: 100%;
+    }
 }
 h3{
     text-align: center;
@@ -147,7 +144,7 @@ h3{
     font-size: 50px;
 }
 .cardManga:hover{
-    transform: scale(1.10);
+    transform: scale(1.05);
 }
 #btn7{
     bottom: 0;
@@ -170,6 +167,8 @@ form{
     border-radius: 20%;
     display: flex;
     margin: auto;
+    width: 70%;
+    height: 400px;
 }
 #btn8{
     width:100px;
@@ -180,6 +179,7 @@ form{
     border-radius: 20%;
     display: flex;
     margin: auto;
+    width: 100%
 }
 .cardManga:hover{
     transform: none;
@@ -188,4 +188,29 @@ form{
 .figurineList{
     margin-left: auto;
     margin-right: auto ;
+}
+.btn-lg{
+    width: 100%;
+}
+@media (max-width: 932px){
+    .btn-lg{
+        width : 100%;
+    }
+}
+#newUser{
+    margin-top : 5%;
+    color : white;
+    box-shadow: 0.5px 0.5px white, -0.5em 0 0.7em white;
+}
+#userModal{
+    color : black;
+}
+#userModifModal{
+    color : black;
+}
+#formModifUser{
+    color : black;
+}
+.mini-cart-item-word{
+    color : white;
 }

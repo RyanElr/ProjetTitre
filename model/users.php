@@ -7,7 +7,13 @@ class users extends database {
     public $password = '';
     public $mail = '';
     public $lastname = '';
+    public $address = '';
     public $firstname = '';
+    public $city = '';
+    public $civility = '';
+    public $phone = '';
+    public $birthdate = '';
+    public $postalCode = '';
 
     public function __construct() {
         parent::__construct();
@@ -20,9 +26,9 @@ class users extends database {
      */
     public function userConnection() {
         $state = false;
-        $query = 'SELECT `id`, `lastname`, `firstname`, `password` FROM `DFD54Z_users` WHERE `login` = :login';
+        $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `address`, `postalCode`, `city` FROM `DFD54Z_users` WHERE `mail` = :mail';
         $result = $this->db->prepare($query);
-        $result->bindValue(':login', $this->login, PDO::PARAM_STR);
+        $result->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         if ($result->execute()) { //On vérifie que la requête s'est bien exécutée
             $selectResult = $result->fetch(PDO::FETCH_OBJ);
             if (is_object($selectResult)) { //On vérifie que l'on a bien trouvé un utilisateur
@@ -31,6 +37,41 @@ class users extends database {
                 $this->firstname = $selectResult->firstname;
                 $this->password = $selectResult->password;
                 $this->id = $selectResult->id;
+                $this->phone = $selectResult->phone;
+                $this->address = $selectResult->address;
+                $this->postalCode = $selectResult->postalCode;
+                $this->city = $selectResult->city;
+                $state = true;
+            }
+        }
+        return $state;
+    }
+
+    /**
+     * 
+     * Prends l'id du patient pour afficher ses informations.
+     * 
+     * @return boolean
+     */
+    public function getUserProfil() {
+        $state = false;
+        $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `address`, `mail`, `city`, `postalCode`,DATE_FORMAT(birthdate, "%d/%m/%Y") AS birthdate FROM `DFD54Z_users` WHERE `id` = :id';
+        $result = $this->db->prepare($query);
+        $result->bindValue(':id', $this->id, PDO::PARAM_INT);
+        if ($result->execute()) { //On vérifie que la requête s'est bien exécutée
+            $selectResult = $result->fetch(PDO::FETCH_OBJ);
+            if (is_object($selectResult)) { //On vérifie que l'on a bien trouvé un utilisateur
+                // On hydrate
+                $this->lastname = $selectResult->lastname;
+                $this->firstname = $selectResult->firstname;
+                $this->birthdate = $selectResult->birthdate;
+                $this->mail = $selectResult->mail;
+                $this->password = $selectResult->password;
+                $this->id = $selectResult->id;
+                $this->phone = $selectResult->phone;
+                $this->address = $selectResult->address;
+                $this->postalCode = $selectResult->postalCode;
+                $this->city = $selectResult->city;
                 $state = true;
             }
         }
@@ -42,25 +83,48 @@ class users extends database {
      * @return boolean
      */
     public function userRegister() {
-        $query = 'INSERT INTO `DFD54Z_users` (`lastname`, `firstname`, `mail`, `password`, `login`) VALUES (:lastname, :firstname, :mail, :password, :login)';
-        $result = $this->db->prepare($query);
-        $result->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
-        $result->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
-        $result->bindValue(':mail', $this->mail, PDO::PARAM_STR);
-        $result->bindValue(':password', $this->password, PDO::PARAM_STR);
-        $result->bindValue(':login', $this->login, PDO::PARAM_STR);
-        return $result->execute();
+        $query = 'INSERT INTO `DFD54Z_users`(`lastname`, `firstname`, `address`, `birthdate`, `postalCode`, `phone`, `mail`, `city`, `civility`, `password`) '
+                . 'VALUES (:lastname, :firstname, :address, :birthdate, :postalCode, :phone, :mail, :city, :civility, :password)';
+        $insertUsers = $this->db->prepare($query);
+        $insertUsers->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
+        $insertUsers->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
+        $insertUsers->bindValue(':address', $this->address, PDO::PARAM_STR);
+        $insertUsers->bindValue(':birthdate', $this->birthdate, PDO::PARAM_STR);
+        $insertUsers->bindValue(':postalCode', $this->postalCode, PDO::PARAM_INT);
+        $insertUsers->bindValue(':phone', $this->phone, PDO::PARAM_STR);
+        $insertUsers->bindValue(':city', $this->city, PDO::PARAM_STR);
+        $insertUsers->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $insertUsers->bindValue(':civility', $this->civility, PDO::PARAM_STR);
+        $insertUsers->bindValue(':password', $this->password, PDO::PARAM_STR);
+        return $insertUsers->execute();
     }
 
-    public function checkIfUserExist(){
-        $state = false;
-        $query = 'SELECT COUNT(`id`) AS `count` FROM `DFD54Z_customers` WHERE `login` = :login';
-        $result = $this->db->prepare($query);
-        $result->bindValue(':login', $this->login, PDO::PARAM_STR);
-        if ($result->execute()) {
-            $selectResult = $result->fetch(PDO::FETCH_OBJ);
-            $state = $selectResult->count;
-        }
-        return $state;
+    /*
+     * Méthode permettant de modifier un utilisateur.
+     */
+
+    public function modifyUser() {
+        $query = 'UPDATE `DFD54Z_users` SET `address`= :address, `postalCode` = :postalCode, `phone`= :phone, `mail`= :mail, `city` = :city, `password` = :password WHERE `id` = :id;';
+        $insertUsers = $this->db->prepare($query);
+        $insertUsers->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $insertUsers->bindValue(':address', $this->address, PDO::PARAM_STR);
+        $insertUsers->bindValue(':postalCode', $this->postalCode, PDO::PARAM_INT);
+        $insertUsers->bindValue(':phone', $this->phone, PDO::PARAM_STR);
+        $insertUsers->bindValue(':city', $this->city, PDO::PARAM_STR);
+        $insertUsers->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        $insertUsers->bindValue(':password', $this->password, PDO::PARAM_STR);
+        return $insertUsers->execute();
     }
+
+    /*
+     * Méthode permettant de supprimer un utilisateur.
+     */
+
+    public function removeUser() {
+        $query = 'DELETE FROM `DFD54Z_users` WHERE id = :id';
+        $remove = $this->db->prepare($query);
+        $remove->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $remove->execute();
+    }
+
 }

@@ -1,0 +1,9 @@
+<ifModule mod_rewrite.c>
+
+    RewriteEngine On
+
+    RewriteRule ^page-([0-6]+).html$ index.php?page=$1
+
+    ErrorDocument 404     /404.php
+
+ </ifModule>

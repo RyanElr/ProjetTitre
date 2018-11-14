@@ -1,35 +1,41 @@
 <?php
-$login = '';
-$errorList = array();
-$message='';
 
-if (!empty($_POST['login'])) {
-    $login = htmlspecialchars($_POST['login']);
-}else{
-    $errorList['login'] = ERROR_LOGIN;
+$mail = '';
+$message = '';
+$formError = array();
+// Vérification de l'adresse mail de connexion.
+if (!empty($_POST['mail'])) {
+    $mail = htmlspecialchars($_POST['mail']);
+} else {
+    $formError['mail'] = 'Veuillez entrer votre adresse mail';
 }
-
+// Vérification du mot de passe de connexion.
 if (!empty($_POST['password'])) {
     $password = $_POST['password'];
-}else{
-    $errorList['password'] = ERROR_LOGIN;
 }
-
-if(count($errorList) == 0){
+else {
+    $formError['password'] = 'Veuillez entrer votre mot de passe';
+}
+// Si tout est bon, nous nous connectons au compte utilisateur.
+if (count($formError) == 0) {
     $user = new users();
-    $user->login = $login;
-    if($user->userConnection()){
-        if(password_verify($password, $user->password)){
-            //la connexion se fait
+    $user->mail = $mail;
+    if ($user->userConnection()) {
+        if (password_verify($password, $user->password)) {
+            //Si la connexion s'est faite
             $message = USER_CONNECTION_SUCCESS;
             //On rempli la session avec les attributs de l'objet issus de l'hydratation
-            $_SESSION['login'] = $user->login;
+            $_SESSION['mail'] = $user->mail;
             $_SESSION['lastname'] = $user->lastname;
             $_SESSION['firstname'] = $user->firstname;
+            $_SESSION['phone'] = $user->phone;
+            $_SESSION['address'] = $user->address;
+            $_SESSION['postalCode'] = $user->postalCode;
             $_SESSION['id'] = $user->id;
             $_SESSION['isConnect'] = true;
-        }else{
-            //la connexion échoue
+            header('Location:index.php');
+        } else {
+            //Sinon connexion échoue
             $message = USER_CONNECTION_ERROR;
         }
     }

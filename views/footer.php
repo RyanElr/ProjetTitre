@@ -1,20 +1,20 @@
 <footer>
-    <div class="row py-4 d-flex align-items-center">
+    <div class="row">
         <div id="foota">
             <div class="container-fluid">
                 <!-- Grid row-->
             </div>
         </div>
         <!-- Footer Links -->
-        <div class="container text-center text-md-left mt-5">
+        <div class="container mt-5">
             <!-- Grid row -->
-            <div class="row mt-3 dark-grey-text">
+            <div class="row">
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
 
                     <!--Liens-->
 
-                    <h6 id="forco" class="text-uppercase font-weight-bold">Mes liens</h6>
+                    <h6 id="forco">Mes liens</h6>
                     <p>
                         <a href="https://www.facebook.com/Ryan.Redskins"><i id="iconstyle" class="fab fa-facebook-square fa-3x"></i></a>
                         <a href="https://www.instagram.com/?hl=fr"><i id="iconstyle" class="fab fa-instagram fa-3x"> </i> </a>

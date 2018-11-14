@@ -23,7 +23,7 @@ class database {
      */
     protected function dbConnect() {
         try {
-            $this->db = new PDO('mysql:host=' . $this->host . ';port=3306;dbname=' . $this->dbname . ';charset=UTF8;', $this->login, $this->password);
+            $this->db = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbname . ';charset=UTF8;', $this->login, $this->password);
         } catch (Exception $ex) {
             $ex->getMessage();
         }

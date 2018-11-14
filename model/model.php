@@ -46,7 +46,7 @@ class produits{
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE idType = 1');
+                . 'WHERE id_DFD54Z_categories = 1');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
           // Stocke la requête dans $PDOResult
@@ -59,7 +59,7 @@ class produits{
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE idType = 2');
+                . 'WHERE id_DFD54Z_categories = 2');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
           // Stocke la requête dans $PDOResult
@@ -72,7 +72,7 @@ class produits{
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE idType = 1 AND idCategory = 1');
+                . 'WHERE id_DFD54Z_categories = 1 AND id_DFD54Z_types = 1');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
           // Stocke la requête dans $PDOResult
@@ -85,7 +85,7 @@ class produits{
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE idType = 1 AND idCategory = 2');
+                . 'WHERE id_DFD54Z_categories = 1 AND id_DFD54Z_types = 2');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
           // Stocke la requête dans $PDOResult
@@ -98,7 +98,7 @@ class produits{
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE idType = 1 AND idCategory = 3');
+                . 'WHERE id_DFD54Z_categories = 1 AND id_DFD54Z_types = 3');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
           // Stocke la requête dans $PDOResult
@@ -111,7 +111,7 @@ class produits{
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE idType = 2 AND idCategory = 1');
+                . 'WHERE id_DFD54Z_categories = 2 AND id_DFD54Z_types = 1');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
           // Stocke la requête dans $PDOResult
@@ -124,7 +124,7 @@ class produits{
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE idType = 2 AND idCategory = 2');
+                . 'WHERE id_DFD54Z_categories = 2 AND id_DFD54Z_types = 2');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
           // Stocke la requête dans $PDOResult
@@ -137,7 +137,7 @@ class produits{
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE idType = 2 AND idCategory = 3');
+                . 'WHERE id_DFD54Z_categories = 2 AND id_DFD54Z_types = 3');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
           // Stocke la requête dans $PDOResult

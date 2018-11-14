@@ -1,4 +1,7 @@
 <?php
+// Inclusion des models dans le header.
+include_once'model/users.php';
+include_once'model/model.php';
 if (isset($_GET['action'])) {
     //Si on veut se déconnecter
     if ($_GET['action'] == 'disconnect') {
@@ -8,7 +11,16 @@ if (isset($_GET['action'])) {
         header('location:index.php');
     }
 }
-//choix de la langue
+if (isset($_GET['page'])) {
+    $page = intval(htmlspecialchars($_GET['page']));
+} else {
+    $page = 1;
+}
+$produit = new produits();
+    $_SESSION['price'] = $produit->price;
+
+
+//Choix de la langue
 if (!empty($_GET['lang'])) {
     //on enregistre la langue de l'utilisateur
     $_SESSION['lang'] = $_GET['lang'];
