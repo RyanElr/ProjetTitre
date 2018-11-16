@@ -26,7 +26,7 @@ class users extends database {
      */
     public function userConnection() {
         $state = false;
-        $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `address`, `postalCode`, `city` FROM `DFD54Z_users` WHERE `mail` = :mail';
+        $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `address`, `postalCode`, `userType`, `city` FROM `DFD54Z_users` WHERE `mail` = :mail';
         $result = $this->db->prepare($query);
         $result->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         if ($result->execute()) { //On vérifie que la requête s'est bien exécutée
@@ -41,6 +41,7 @@ class users extends database {
                 $this->address = $selectResult->address;
                 $this->postalCode = $selectResult->postalCode;
                 $this->city = $selectResult->city;
+                $this->userType = $selectResult->userType;
                 $state = true;
             }
         }
@@ -55,7 +56,7 @@ class users extends database {
      */
     public function getUserProfil() {
         $state = false;
-        $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `address`, `mail`, `city`, `postalCode`,DATE_FORMAT(birthdate, "%d/%m/%Y") AS birthdate FROM `DFD54Z_users` WHERE `id` = :id';
+        $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `address`, `mail`, `city`,`userType`, `postalCode`,DATE_FORMAT(birthdate, "%d/%m/%Y") AS birthdate FROM `DFD54Z_users` WHERE `id` = :id';
         $result = $this->db->prepare($query);
         $result->bindValue(':id', $this->id, PDO::PARAM_INT);
         if ($result->execute()) { //On vérifie que la requête s'est bien exécutée
@@ -72,10 +73,22 @@ class users extends database {
                 $this->address = $selectResult->address;
                 $this->postalCode = $selectResult->postalCode;
                 $this->city = $selectResult->city;
+                $this->userType = $selectResult->userType;
                 $state = true;
             }
         }
         return $state;
+    }
+        public function getAllUsersProfil() {
+
+        $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `address`, `mail`, `city`,`userType`, `postalCode`,DATE_FORMAT(birthdate, "%d/%m/%Y") AS birthdate FROM `DFD54Z_users` WHERE `userType` = 2';
+        $result = $this->db->prepare($query);
+        if ($result->execute()) { //On vérifie que la requête s'est bien exécutée
+            $selectResult = $result->fetchAll(PDO::FETCH_OBJ);
+            if (is_object($selectResult)) { //On vérifie que l'on a bien trouvé un utilisateur
+            }
+        }
+        return $selectResult;
     }
 
     /**
@@ -83,8 +96,8 @@ class users extends database {
      * @return boolean
      */
     public function userRegister() {
-        $query = 'INSERT INTO `DFD54Z_users`(`lastname`, `firstname`, `address`, `birthdate`, `postalCode`, `phone`, `mail`, `city`, `civility`, `password`) '
-                . 'VALUES (:lastname, :firstname, :address, :birthdate, :postalCode, :phone, :mail, :city, :civility, :password)';
+        $query = 'INSERT INTO `DFD54Z_users`(`lastname`, `firstname`, `address`, `birthdate`, `postalCode`, `phone`, `mail`, `city`, `civility`, `password`, `userType`) '
+                . 'VALUES (:lastname, :firstname, :address, :birthdate, :postalCode, :phone, :mail, :city, :civility, :password, 1)';
         $insertUsers = $this->db->prepare($query);
         $insertUsers->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $insertUsers->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);

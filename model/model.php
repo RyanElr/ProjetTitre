@@ -1,29 +1,35 @@
 <?php
+
 /**
  * Création de la classe clients
  */
-class produits{
-        private $connexion;
+class produits {
+
+    private $connexion;
     public $id;
     public $lastName;
     public $firstName;
     public $birthDate;
     public $type;
     public $price;
-    public $title; 
+    public $title;
     public $imgUrl;
-    public function __construct(){
+    public $id_DFD54Z_type;
+    public $id_DFD54Z_categories;
+
+    public function __construct() {
         //On test les erreurs avec le try/catch 
         //Si tout est bon, on est connecté à la base de donnée
-        try{
+        try {
             $this->connexion = new PDO('mysql:host=localhost;dbname=ecommerce;charset=utf8', 'root', 'c8fwdxwh');
         }
         //Autrement, un message d'erreur est affiché
-        catch(Exception $e){
+        catch (Exception $e) {
             die($e->getMessage());
         }
     }
-        public function getBestSellersList(){
+
+    public function getBestSellersList() {
         $isObjectResult = array();
         $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
@@ -31,136 +37,108 @@ class produits{
                 . 'ORDER BY `title`');
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
+            // Stocke la requête dans $PDOResult
+            $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
         }
         // Retourne $PDOResult
         return $isObjectResult;
     }
-       
+
     /**
      * Méthode getClientsList pour récupérer le résultat de la requête
      * @return type
      */
-    public function getLuminaryList(){
-        $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
-                . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = 1');
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
-       public function getFiguresList(){
-        $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
-                . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = 2');
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
-   public function getLuminaryDragonBallList(){
-        $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
-                . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = 1 AND id_DFD54Z_types = 1');
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
-   public function getLuminaryNarutoList(){
-        $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
-                . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = 1 AND id_DFD54Z_types = 2');
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
-    public function getLuminaryOnePieceList(){
-        $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
-                . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = 1 AND id_DFD54Z_types = 3');
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
-           public function getFiguresDragonBallList(){
-        $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
-                . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = 2 AND id_DFD54Z_types = 1');
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
-           public function getFiguresNarutoList(){
-        $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
-                . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = 2 AND id_DFD54Z_types = 2');
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
-           public function getFiguresOnePieceList(){
-        $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
-                . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = 2 AND id_DFD54Z_types = 3');
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-          // Stocke la requête dans $PDOResult
-          $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
-            public function searchProducts(){
-            $result = array();
+    public function searchProducts() {
+        $result = array();
         $remove = $this->connexion->prepare('SELECT `id`, `title`, `price` FROM `DFD54Z_products` '
                 . 'WHERE `title`');
-        $remove->bindValue('title', '%' . $this->search , PDO::PARAM_STR);
-   if ($remove->execute()) {
+        $remove->bindValue('title', '%' . $this->search, PDO::PARAM_STR);
+        if ($remove->execute()) {
             $result = $remove->fetchAll(PDO::FETCH_OBJ);
         }
         return $result;
     }
+
+    public function productsRegister() {
+        $query = 'INSERT INTO `DFD54Z_products`(`title`, `price`, `imgUrl`, `id_DFD54Z_categories`, `id_DFD54Z_types`) '
+                . 'VALUES (:title, :price, :imgUrl, :category, :type)';
+        $insertUsers = $this->db->prepare($query);
+        $insertUsers->bindValue(':title', $this->title, PDO::PARAM_STR);
+        $insertUsers->bindValue(':price', $this->price, PDO::PARAM_FLOAT);
+        $insertUsers->bindValue(':imgUrl', $this->imgUrl, PDO::PARAM_STR);
+        $insertUsers->bindValue(':category', $this->id_DFD54Z_categories, PDO::PARAM_INT);
+        $insertUsers->bindValue(':type', $this->id_DFD54Z_types, PDO::PARAM_INT);
+        return $insertUsers->execute();
+    }
+
+    public function getProductsListByCategory() {
+        $isObjectResult = array();
+        $PDOResult = $this->connexion->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+                . ' FROM `DFD54Z_products`'
+                . 'WHERE id_DFD54Z_categories = :category');
+        $PDOResult->bindValue(':category', $this->id_DFD54Z_categories, PDO::PARAM_INT);
+        $PDOResult->execute();
+        // Vérifie que $PDOResult est un objet
+        if (is_object($PDOResult)) {
+            // Stocke la requête dans $PDOResult
+            $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
+        }
+        // Retourne $PDOResult
+        return $isObjectResult;
+    }
+
+    public function getProductsListByType() {
+        $isObjectResult = array();
+        $PDOResult = $this->connexion->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+                . ' FROM `DFD54Z_products`'
+                . 'WHERE id_DFD54Z_categories = :category AND WHERE id_DFD54Z_types = :type ');
+        $PDOResult->bindValue(':category', $this->id_DFD54Z_categories, PDO::PARAM_INT);
+        $PDOResult->bindValue(':type', $this->id_DFD54Z_types, PDO::PARAM_INT);
+        $PDOResult->execute();
+        // Vérifie que $PDOResult est un objet
+        if (is_object($PDOResult)) {
+            // Stocke la requête dans $PDOResult
+            $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
+        }
+        // Retourne $PDOResult
+        return $isObjectResult;
+    }
+
+    public function getProductsListByTypes() {
+        $isObjectResult = array();
+        $PDOResult = $this->connexion->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+                . ' FROM `id_DFD54Z_types`');
+        $PDOResult->execute();
+        // Vérifie que $PDOResult est un objet
+        if (is_object($PDOResult)) {
+            // Stocke la requête dans $PDOResult
+            $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
+        }
+        // Retourne $PDOResult
+        return $isObjectResult;
+    }
+
+    public function getProductsListByCategories() {
+        $isObjectResult = array();
+        $PDOResult = $this->connexion->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+                . ' FROM `id_DFD54Z_categories`');
+        $PDOResult->execute();
+        // Vérifie que $PDOResult est un objet
+        if (is_object($PDOResult)) {
+            // Stocke la requête dans $PDOResult
+            $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
+        }
+        // Retourne $PDOResult
+        return $isObjectResult;
+    }
+
     /**
      * Méthode destruct
      */
-    public function __destruct(){
+    public function __destruct() {
         ;
     }
+
 }
+
 ?>

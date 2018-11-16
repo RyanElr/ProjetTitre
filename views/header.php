@@ -44,42 +44,52 @@ include_once 'controller/headerCtrl.php';
                                     </a>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="../luminaire.php" id="navbarDropdownMenuLink">
+                                    <a class="nav-link dropdown-toggle" href="../produits.php?cat=1" id="navbarDropdownMenuLink">
                                         Luminaire
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" id="dragon" href="../LuminaireDragonBall.php">Dragon Ball</a>
-                                        <a class="dropdown-item" href="../LuminaireNaruto.php">Naruto</a>
-                                        <a class="dropdown-item" href="../LuminaireOnePiece.php">One piece</a>
+                                        <a class="dropdown-item" id="dragon" href="../produits.php?cat=1&typ=1">Dragon Ball</a>
+                                        <a class="dropdown-item" href="../produits.php?cat=1&typ=2">Naruto</a>
+                                        <a class="dropdown-item" href="../produits.php?cat=1&typ=3">One piece</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="../figurine.php" id="navbarDropdownMenuLink">
+                                    <a class="nav-link dropdown-toggle" href="../produits.php?cat=2" id="navbarDropdownMenuLink">
                                         Figurines
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="../FigurinesDragonBall.php">Dragon Ball</a>
-                                        <a class="dropdown-item" href="../FigurinesNaruto.php">Naruto</a>
-                                        <a class="dropdown-item" href="../FigurinesOnePiece.php">One Piece</a>
+                                        <a class="dropdown-item" href="../produits.php?cat=2&typ=1">Dragon Ball</a>
+                                        <a class="dropdown-item" href="../produits.php?cat=2&typ=2">Naruto</a>
+                                        <a class="dropdown-item" href="../produits.php?cat=2&typ=3">One Piece</a>
                                     </div>
                                 </li>
                             </ul>
                             <ul class="navbar-nav">
                                 <li>
                                     <?php if (!isset($_SESSION['isConnect'])) { ?>
-                                        <a class ="nav-link" href="login.php"><?= NAV_CONNECT ?></a>
+                                        <a class ="nav-link" href="../login.php"><?= NAV_CONNECT ?></a>
                                     </li>
                                     <li>
                                         <a class="nav-link logAndRegister" id="register" href="../register.php">
                                             <?= REGISTER_TITLE ?>
                                         </a>
                                     </li>
+                                <?php } else if(isset ($_SESSION['isConnect']) && $_SESSION['userType'] == 1) {?>
+                                 <li class="nav-item dropdown">
+                                        <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink"><?= NAV_WELCOME . $_SESSION['firstname'] ?></a>  
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" <a id="hrefColorPatient" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
+                                                <a class="dropdown-item" <a id="hrefColorPatient" href="../allProfils.php">Tout les profils</a>
+                                                    <a class="dropdown-item" <a id="hrefColorPatient" href="../newProducts.php">Ajout de produits</a>
+                                            <a class="dropdown-item" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
+                                        </div>
+                                    </li>
                                 <?php } else { ?>
                                     <li class="nav-item dropdown">
                                         <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink"><?= NAV_WELCOME . $_SESSION['firstname'] ?></a>  
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
                                             <a class="dropdown-item" <a id="hrefColorPatient" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
+                                            <a class="dropdown-item" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
                                         </div>
                                     </li>
                                 <?php } ?>  

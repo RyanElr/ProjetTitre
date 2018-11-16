@@ -18,8 +18,8 @@ include'views/header.php';
                             <option disabled="Veuillez choisir une civilité" selected>Veuillez choisir une civilité</option>
                             <option>Mr</option>
                             <option>Mme</option>
-                            <option>Autre</option>
                         </select>
+                        <p class="text-danger"><?= isset($formError['civility']) ? $formError['civility'] : ''; ?></p>
                     </p>
                     <label for="lastname"><?= REGISTER_LASTNAME ?></label>
                     <input id="lastname" type="text" name="lastname" value="<?= isset($lastname) ? $lastname : '' ?>" />

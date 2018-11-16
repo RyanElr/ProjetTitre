@@ -19,7 +19,12 @@ if (isset($_GET['page'])) {
 $produit = new produits();
     $_SESSION['price'] = $produit->price;
 
-
+if (!empty($_GET['userType'])) {
+    $user = new users();
+    $_SESSION['userType'] = $user->userType;
+    $user->userType = $_GET['userType'];
+    $userProfil = $user->getUserProfil();
+}
 //Choix de la langue
 if (!empty($_GET['lang'])) {
     //on enregistre la langue de l'utilisateur

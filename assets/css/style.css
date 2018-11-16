@@ -198,6 +198,7 @@ form{
     }
 }
 #newUser{
+    text-align: center;
     margin-top : 5%;
     color : white;
     box-shadow: 0.5px 0.5px white, -0.5em 0 0.7em white;
@@ -214,3 +215,19 @@ form{
 .mini-cart-item-word{
     color : white;
 }
+#infoBoxShadow{
+    text-align: center;
+    vertical-align: middle;
+    margin-top : 5%;
+    color : white;
+    box-shadow: 0.5px 0.5px white, -0.5em 0 0.7em white;
+}
+#allUsersProfil{
+    text-align: center;
+    margin-top : 5%;
+    color : white;
+    box-shadow: 0.5px 0.5px white, -0.5em 0 0.7em white;
+   }
+   #btnDismiss:hover{
+       background-color:black;
+   }

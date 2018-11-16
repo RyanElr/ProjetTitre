@@ -2,7 +2,7 @@
 session_start();
 include'configuration.php';
 include'model/model.php';
-include 'controller/controller.php';
+include 'controller/indexCtrl.php';
 include 'views/header.php' ?>
     <body>
         <!--Caroussel
@@ -15,12 +15,12 @@ include 'views/header.php' ?>
         </div>
   <div class="container">
                 <div class="row">
-            <?php foreach ($bestSellersList as $bestSellers) { ?>
+            <?php foreach ($productsList as $product) { ?>
                     <div class="col-md-4 col-lg-6 col-sm-12 col-xs-12 shadow p-3 mb-5 bg-black rounded">
-                        <img id="zoom" class="cardManga" src="assets/img/<?= $bestSellers->imgUrl?>" height="300"/>
-                        <div class="card-body"><h2 class="card-text"><?= $bestSellers->title ?></h2></div>
-                        <div class="card-body"><p class="card-text"><?= $bestSellers->price ?>€</p></div>
-                        <button type="button" data-qt="1" data-id="<?=$bestSellers->id ?>" data-title="<?= $bestSellers->title?>" data-price="<?= $bestSellers->price ?>" id="n1" class="add-to-cart btn btn-outline-primary btn-lg w-100">AJOUTER AU PANIER</button>
+                        <img id="zoom" class="cardManga" src="assets/img/<?= $product->imgUrl?>" height="300"/>
+                        <div class="card-body"><h2 class="card-text"><?= $product->title ?></h2></div>
+                        <div class="card-body"><p class="card-text"><?= $product->price ?>€</p></div>
+                        <button type="button" data-qt="1" data-id="<?=$product->id ?>" data-title="<?= $product->title?>" data-price="<?= $product->price ?>" id="n1" class="add-to-cart btn btn-outline-primary btn-lg w-100">AJOUTER AU PANIER</button>
                     </div>
                 <?php } ?>
                 </div>

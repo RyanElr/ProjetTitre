@@ -5,9 +5,11 @@ include_once 'model/users.php';
 include_once 'controller/profilCtrl.php';
 include_once 'views/header.php';
 ?>   
+<div class="container">
 <div id="infoBoxShadow">
-    <div class="alert" id="newUser">
         <h1>Votre profil</h1>
+</div>
+    <div class="alert" id="newUser">
         <p><?= $user->lastname ?></p>
         <p><?= $user->firstname ?></p>
         <p><?= $user->birthdate ?></p>
@@ -35,7 +37,7 @@ include_once 'views/header.php';
                     </div>
                     <div class="modal-footer">
                         <form method="POST" action="?idRemove=<?= $user->id ?> ?disconnect">
-                            <input type="submit" value="Supprimer" name="submit" />
+                            <input class="btn btn-danger" type="submit" value="Supprimer" name="submit" />
                         </form>
                         <input type="submit" value="Annuler" data-dismiss="modal" />
                     </div>
@@ -104,11 +106,11 @@ include_once 'views/header.php';
                                 <input type="password" name="passwordVerify" id="passwordVerify" value="<?= $user->password ?>"/>
                                 <p class="text-danger"><?= isset($formError['password']) ? $formError['password'] : ''; ?></p>
                             </div>
-                            <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifUser" value="Modification de l'utilisateur" />
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                            <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifUser" value="Modification de l'utilisateur" />
+                        <button id="btnDismiss" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                     </div>
                 </div>
             </div>
