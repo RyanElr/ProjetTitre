@@ -175,15 +175,15 @@ form{
 }
 @media (max-width: 932px){
     .cardManga{
-    transition:none;
-    border-radius: 20%;
-    display: flex;
-    margin: auto;
-    width: 100%
-}
-.cardManga:hover{
-    transform: none;
-}
+        transition:none;
+        border-radius: 20%;
+        display: flex;
+        margin: auto;
+        width: 100%
+    }
+    .cardManga:hover{
+        transform: none;
+    }
 }
 .figurineList{
     margin-left: auto;
@@ -227,7 +227,10 @@ form{
     margin-top : 5%;
     color : white;
     box-shadow: 0.5px 0.5px white, -0.5em 0 0.7em white;
-   }
-   #btnDismiss:hover{
-       background-color:black;
-   }
+}
+#btnDismiss:hover{
+    background-color:black;
+}
+#redirectConnection:hover{
+    background-color:black;
+}

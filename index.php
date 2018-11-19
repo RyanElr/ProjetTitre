@@ -1,7 +1,6 @@
 <?php 
 session_start();
 include'configuration.php';
-include'model/model.php';
 include 'controller/indexCtrl.php';
 include 'views/header.php' ?>
     <body>

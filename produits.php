@@ -1,6 +1,6 @@
 <?php
+session_start();
 include'configuration.php';
-include'model/model.php';
 include'controller/produitsCtrl.php';
 include'views/header.php';
 ?>

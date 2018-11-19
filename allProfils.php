@@ -17,14 +17,16 @@ include_once 'views/header.php';
                     <input type="submit" value="Supprimer" name="submit" />
                 </form>
             </div>
+</div>
                 <?php } ?>
     <?php } else {
     ?>
+    <div class="container">
     <div id="infoBoxShadow">
         <div class="alert" id="allUsersProfil">
             <h1>Vous n'avez pas les droits d'administrateur.</h1>
         </div>
     </div>
+    </div>
 <?php }  ?>
-</div>
 <?php include 'views/footer.php' ?>

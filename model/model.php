@@ -3,9 +3,8 @@
 /**
  * Création de la classe clients
  */
-class produits {
+class produits extends database{
 
-    private $connexion;
     public $id;
     public $lastName;
     public $firstName;
@@ -14,24 +13,17 @@ class produits {
     public $price;
     public $title;
     public $imgUrl;
-    public $id_DFD54Z_type;
+    public $id_DFD54Z_types;
     public $id_DFD54Z_categories;
 
     public function __construct() {
-        //On test les erreurs avec le try/catch 
-        //Si tout est bon, on est connecté à la base de donnée
-        try {
-            $this->connexion = new PDO('mysql:host=localhost;dbname=ecommerce;charset=utf8', 'root', 'c8fwdxwh');
-        }
-        //Autrement, un message d'erreur est affiché
-        catch (Exception $e) {
-            die($e->getMessage());
-        }
+        parent::__construct();
+        $this->dbConnect();
     }
 
     public function getBestSellersList() {
         $isObjectResult = array();
-        $PDOResult = $this->connexion->query('SELECT `id`, `title`, `price`, `imgUrl`'
+        $PDOResult = $this->db->query('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
                 . 'WHERE `id` = 1 OR `id` = 31  OR `id` = 32 OR `id` = 36 OR `id` = 9 OR `id` = 41 '
                 . 'ORDER BY `title`');
@@ -50,7 +42,7 @@ class produits {
      */
     public function searchProducts() {
         $result = array();
-        $remove = $this->connexion->prepare('SELECT `id`, `title`, `price` FROM `DFD54Z_products` '
+        $remove = $this->db->prepare('SELECT `id`, `title`, `price` FROM `DFD54Z_products` '
                 . 'WHERE `title`');
         $remove->bindValue('title', '%' . $this->search, PDO::PARAM_STR);
         if ($remove->execute()) {
@@ -64,7 +56,7 @@ class produits {
                 . 'VALUES (:title, :price, :imgUrl, :category, :type)';
         $insertUsers = $this->db->prepare($query);
         $insertUsers->bindValue(':title', $this->title, PDO::PARAM_STR);
-        $insertUsers->bindValue(':price', $this->price, PDO::PARAM_FLOAT);
+        $insertUsers->bindValue(':price', $this->price, PDO::PARAM_STR);
         $insertUsers->bindValue(':imgUrl', $this->imgUrl, PDO::PARAM_STR);
         $insertUsers->bindValue(':category', $this->id_DFD54Z_categories, PDO::PARAM_INT);
         $insertUsers->bindValue(':type', $this->id_DFD54Z_types, PDO::PARAM_INT);
@@ -73,7 +65,7 @@ class produits {
 
     public function getProductsListByCategory() {
         $isObjectResult = array();
-        $PDOResult = $this->connexion->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+        $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
                 . 'WHERE id_DFD54Z_categories = :category');
         $PDOResult->bindValue(':category', $this->id_DFD54Z_categories, PDO::PARAM_INT);
@@ -87,13 +79,13 @@ class produits {
         return $isObjectResult;
     }
 
-    public function getProductsListByType() {
+    public function getProductsListByCategoryAndType() {
         $isObjectResult = array();
-        $PDOResult = $this->connexion->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+        $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
-                . 'WHERE id_DFD54Z_categories = :category AND WHERE id_DFD54Z_types = :type ');
-        $PDOResult->bindValue(':category', $this->id_DFD54Z_categories, PDO::PARAM_INT);
+                . 'WHERE id_DFD54Z_types = :type AND id_DFD54Z_categories = :category');
         $PDOResult->bindValue(':type', $this->id_DFD54Z_types, PDO::PARAM_INT);
+         $PDOResult->bindValue(':category', $this->id_DFD54Z_categories, PDO::PARAM_INT);
         $PDOResult->execute();
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
@@ -106,7 +98,7 @@ class produits {
 
     public function getProductsListByTypes() {
         $isObjectResult = array();
-        $PDOResult = $this->connexion->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+        $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `id_DFD54Z_types`');
         $PDOResult->execute();
         // Vérifie que $PDOResult est un objet
@@ -120,7 +112,7 @@ class produits {
 
     public function getProductsListByCategories() {
         $isObjectResult = array();
-        $PDOResult = $this->connexion->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+        $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `id_DFD54Z_categories`');
         $PDOResult->execute();
         // Vérifie que $PDOResult est un objet
@@ -136,7 +128,6 @@ class produits {
      * Méthode destruct
      */
     public function __destruct() {
-        ;
     }
 
 }

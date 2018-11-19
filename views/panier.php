@@ -34,7 +34,7 @@
             </div>
             <div class="modal-footer">
                 <?php if (!isset($_SESSION['isConnect'])) { ?>
-                    <a href="../login.php"><button type="button" class="btn btn-default"><?= PANER_NOTCONNECTED ?></button></a>
+                    <a href="../login.php"><button type="button" id="redirectConnection" class="btn btn-default"><?= PANER_NOTCONNECTED ?></button></a>
                 <?php } else { ?>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?= PANER_CONTINUE ?></button>
                 <?php } ?>

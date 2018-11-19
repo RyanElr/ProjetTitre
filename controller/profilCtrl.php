@@ -89,8 +89,10 @@ if (isset($_POST['modifUser'])) {
     } else {
         $formError['password'] = 'Veuillez vérifier votre mot de passe';
     }
+    if (count($formError) == 0 ){
     $modifUser = $user->modifyUser();
     if ($user->modifyUser()){
     header('Location:index.php');
+    }
     }
 }
