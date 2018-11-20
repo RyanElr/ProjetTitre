@@ -33,6 +33,9 @@ if (isset($_POST['connect'])) {
                 $_SESSION['isConnect'] = true;
                 header('Location:index.php');
             }
+            else {
+                $message = USER_CONNECTION_ERROR;
+            }
         }
     }
 }

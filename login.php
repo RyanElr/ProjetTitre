@@ -15,6 +15,7 @@ include'views/header.php';
             <p class="text-danger"><?= isset($formError['password']) ? $formError['password'] : ''; ?></p>
             <input type="submit" name="connect" id="connect" value="<?= FORM_LOGIN_SUBMIT ?>" />
         </div>
+            <p><?= $message?></p>
     </form>
     <?php include 'views/footer.php'; ?>
 </body>

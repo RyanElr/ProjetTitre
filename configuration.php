@@ -9,3 +9,4 @@ define('DBNAME', 'ecommerce');
 include_once 'db/database.php';
 include_once 'model/users.php';
 include_once 'model/model.php';
+include_once 'lang/FR_FR.php';

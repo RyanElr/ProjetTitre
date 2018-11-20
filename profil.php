@@ -20,7 +20,7 @@ include_once 'views/header.php';
 
         <!--Modal de suppression de compte -->
 
-        <button type="button" class="btn grey" id="removeUser">Supprimer le compte</button>
+        <button type="button" class ="btn btn-danger" id="removeUser">Supprimer le compte</button>
         <div class="modal fade" id="userModal" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->

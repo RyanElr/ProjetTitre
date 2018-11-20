@@ -56,7 +56,7 @@ include_once 'controller/headerCtrl.php';
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="../produits.php?cat=2" id="navbarDropdownMenuLink">
-                                        Figurines
+                                        Figurine
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                         <a class="dropdown-item" href="../produits.php?cat=2&typ=1">Dragon Ball</a>

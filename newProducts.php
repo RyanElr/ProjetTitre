@@ -4,8 +4,8 @@ include_once 'configuration.php';
 include_once 'model/model.php';
 include_once 'controller/newProductsCtrl.php';
 include_once 'views/header.php';
-?>
-<?php if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 1  || isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 3) { ?>
+if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 1 || isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 3) {
+    ?>
     <form action="#" method="POST">
         <div class="container-fluid" id="FormNewPatientContent">
             <div class="form-group has-error">    
@@ -36,12 +36,12 @@ include_once 'views/header.php';
         </div>
     </form>
 <?php } else { ?>
-<div class="container">
-    <div id="infoBoxShadow">
-        <div class="alert" id="allUsersProfil">
-            <h1>Vous n'avez pas les droits d'administrateur.</h1>
+    <div class="container">
+        <div id="infoBoxShadow">
+            <div class="alert" id="allUsersProfil">
+                <h1>Vous n'avez pas les droits d'administrateur.</h1>
+            </div>
         </div>
     </div>
-</div>
 <?php } ?>
 <?php include_once 'views/footer.php'; ?>
