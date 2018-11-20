@@ -70,7 +70,6 @@ if (isset($_POST['register'])) {
             $formError['register'] = 'Il y a eu un problème';
         }
     }
-var_dump($_POST['category']);
 }
-?>
+
 
