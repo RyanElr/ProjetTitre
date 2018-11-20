@@ -16,7 +16,7 @@ $product->getProductsListByCategories();
 if (isset($_POST['register'])) {
     if (!empty($_POST['category'])) {
         if (preg_match($regexNumber, $_POST['category'])) {
-            $product->id_DFD54Z_categories = htmlspecialchars($_POST['category']);
+            $product->id_categories = htmlspecialchars($_POST['category']);
         } else {
             $formError['category'] = 'Votre catégorie est invalide';
         }
@@ -26,7 +26,7 @@ if (isset($_POST['register'])) {
 
     if (!empty($_POST['type'])) {
         if (preg_match($regexNumber, $_POST['type'])) {
-            $product->id_DFD54Z_types = htmlspecialchars($_POST['type']);
+            $product->id_types = htmlspecialchars($_POST['type']);
         } else {
             $formError['type'] = 'Votre type est invalide';
         }

@@ -1,6 +1,5 @@
 <?php 
 include_once 'configuration.php';
-include_once 'model/users.php';
 include'controller/registerCtrl.php' ;
 include'views/header.php';
 ?>
@@ -36,15 +35,6 @@ include'views/header.php';
                     <label for="phone"><?= REGISTER_PHONENUMBER ?></label>
                     <input id="phone" name="phone" value="<?= isset($phone) ? $phone : '' ?>" />
                     <p class="text-danger"><?= isset($formError['phone']) ? $formError['phone'] : ''; ?></p>
-                    <label for="address"><?= REGISTER_ADDRESS ?></label>
-                    <input type="address" name="address" id="address"/>
-                     <p class="text-danger"><?= isset($formError['address']) ? $formError['address'] : ''; ?></p>
-                    <label for="city"><?= REGISTER_CITY ?></label>
-                    <input type="city" name="city" id="city"/>
-                    <p class="text-danger"><?= isset($formError['city']) ? $formError['city'] : ''; ?></p>
-                    <label for="postalCode"><?= REGISTER_POSTALCODE ?></label>
-                    <input type="postalCode" name="postalCode" id="postalCode"/>
-                    <p class="text-danger"><?= isset($formError['postalCode']) ? $formError['postalCode'] : ''; ?></p>
                     <label for="password"><?= REGISTER_PASSWORD ?></label>
                     <input type="password" name="password" id="password"/>
                     <p class="text-danger"><?= isset($formError['password']) ? $formError['password'] : ''; ?></p>

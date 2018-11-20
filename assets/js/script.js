@@ -27,6 +27,11 @@ $(document).ready(function () {
         $("#userModifModal").modal();
     });
 });
+$(document).ready(function () {
+    $("#modifUserType").click(function () {
+        $("#userRoleModal").modal();
+    });
+});
 
 //Bouton permettant de scroll à une certaine vitesse et à partir d'un certain endroit de la page
 

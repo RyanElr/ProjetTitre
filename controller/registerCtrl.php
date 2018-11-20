@@ -30,16 +30,6 @@ if (isset($_POST['register'])) {
     } else {
         $formError['firstname'] = 'Veuillez indiquer votre prénom';
     }
- // Vérification de l'adresse postal celon la regex
-    if (!empty($_POST['address'])) {
-        if (preg_match($regexAddress, $_POST['address'])) {
-            $user->address = htmlspecialchars($_POST['address']);
-        } else {
-            $formError['address'] = 'La saisie de votre adresse est invalide';
-        }
-    } else {
-        $formError['address'] = 'Veuillez indiquer votre adresse';
-    }
      // Vérification de la date de naissance celon la regex
     if (!empty($_POST['birthdate'])) {
         if (preg_match($regexDate, $_POST['birthdate'])) {
@@ -49,16 +39,6 @@ if (isset($_POST['register'])) {
         }
     } else {
         $formError['birthdate'] = 'Veuillez indiquer votre Date de naissance';
-    }
-     // Vérification du code postal celon la regex
-    if (!empty($_POST['postalCode'])) {
-        if (preg_match($regexPostalCode, $_POST['postalCode'])) {
-            $user->postalCode = htmlspecialchars($_POST['postalCode']);
-        } else {
-            $formError['postalCode'] = 'La saisie de votre code postale est invalide';
-        }
-    } else {
-        $formError['postalCode'] = 'Veuillez indiquer votre code postal';
     }
  // Vérification du numéro de téléphone celon la regex
     if (!empty($_POST['phone'])) {
@@ -89,16 +69,6 @@ if (isset($_POST['register'])) {
         }
     } else {
         $formError['civility'] = 'Veuillez indiquer votre civilité';
-    }
-     // Vérification de la ville celon la regex
-    if (!empty($_POST['city'])) {
-        if (preg_match($regexName, $_POST['city'])) {
-            $user->city = htmlspecialchars($_POST['city']);
-        } else {
-            $formError['city'] = 'La saisie de votre ville est invalide';
-        }
-    } else {
-        $formError['city'] = 'Veuillez indiquer votre ville';
     }
      // Vérification du mot de passe
     if (!empty($_POST['password']) && !empty($_POST['passwordVerify']) && $_POST['password'] == $_POST['passwordVerify']) {

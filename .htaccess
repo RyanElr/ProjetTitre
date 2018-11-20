@@ -1,8 +1,12 @@
 <ifModule mod_rewrite.c>
 
     RewriteEngine On
-
-    RewriteRule ^page-([0-6]+).html$ index.php?page=$1
+    RewriteRule ajout-de-produits newProducts.php
+    RewriteRule connexion login.php
+    RewriteRule enregistrement register.php
+    RewriteRule accueil index.php
+    RewriteRule luminaire produit.php?cat=$1
+    RewriteRule figurine produit.php?cat=$2
 
     ErrorDocument 404     /404.php
 

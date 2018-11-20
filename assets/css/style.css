@@ -234,3 +234,12 @@ form{
 #redirectConnection:hover{
     background-color:black;
 }
+#userRoleModal{
+    color : black;
+}
+.modal{
+    color : black;
+}
+#modifUserType:hover{
+    background-color : #0069D9;
+}

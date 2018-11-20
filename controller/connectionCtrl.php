@@ -1,5 +1,4 @@
 <?php
-
 $mail = '';
 $message = '';
 $formError = array();
@@ -29,15 +28,10 @@ if (isset($_POST['connect'])) {
                 $_SESSION['lastname'] = $user->lastname;
                 $_SESSION['firstname'] = $user->firstname;
                 $_SESSION['phone'] = $user->phone;
-                $_SESSION['address'] = $user->address;
-                $_SESSION['postalCode'] = $user->postalCode;
                 $_SESSION['id'] = $user->id;
                 $_SESSION['userType'] = $user->userType;
                 $_SESSION['isConnect'] = true;
                 header('Location:index.php');
-            } else {
-                //Sinon connexion échoue
-                $message = USER_CONNECTION_ERROR;
             }
         }
     }

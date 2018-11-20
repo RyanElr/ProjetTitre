@@ -23,6 +23,7 @@ include_once 'controller/headerCtrl.php';
         <link rel="stylesheet" href="../assets/css/style.css" />
     </head>
     <div id="body" class="container-fluid">
+        <div class="row">
         <!-- Tête d'affiche -->
         <script src="../assets/js/script.js"></script>
         <div class="ec1">
@@ -48,7 +49,7 @@ include_once 'controller/headerCtrl.php';
                                         Luminaire
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" id="dragon" href="../produits.php?cat=1&typ=1">Dragon Ball</a>
+                                        <a class="dropdown-item" href="../produits.php?cat=1&typ=1">Dragon Ball</a>
                                         <a class="dropdown-item" href="../produits.php?cat=1&typ=2">Naruto</a>
                                         <a class="dropdown-item" href="../produits.php?cat=1&typ=3">One piece</a>
                                     </div>
@@ -84,6 +85,16 @@ include_once 'controller/headerCtrl.php';
                                             <a class="dropdown-item" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
                                         </div>
                                     </li>
+                                    <?php } else if(isset ($_SESSION['isConnect']) && $_SESSION['userType'] == 3) {?>
+                                    <li class="nav-item dropdown">
+                                        <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink"><?= NAV_WELCOME . $_SESSION['firstname'] ?></a>  
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" <a id="hrefColorPatient" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
+                                                <a class="dropdown-item" <a id="hrefColorPatient" href="../allProfils.php">Tout les profils</a>
+                                                    <a class="dropdown-item" <a id="hrefColorPatient" href="../newProducts.php">Ajout de produits</a>
+                                            <a class="dropdown-item" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
+                                        </div>
+                                    </li>
                                 <?php } else { ?>
                                     <li class="nav-item dropdown">
                                         <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink"><?= NAV_WELCOME . $_SESSION['firstname'] ?></a>  
@@ -95,11 +106,12 @@ include_once 'controller/headerCtrl.php';
                                 <?php } ?>  
                             </ul>
                         </div>
+                        <?php if(isset($_GET['cat'])){ ?>
                         <form method="POST" action="#">
-                            <input type="text" placeholder="Search.." name="search" />
+                            <input type="text" placeholder="Rechercher" name="search" />
                             <button><i class="fa fa-search"></i></button>
                         </form>
-                       
+                        <?php }?>
                                     <button type="button" class="btn grey" id="myBtn"><span class="fas fa-shopping-cart fa-2x"></span></button>
                                     <span class="mini-cart-item-word">0</span>
                                
@@ -110,5 +122,3 @@ include_once 'controller/headerCtrl.php';
                 <?php include 'panier.php'; ?>
             </div>
         </div>
-    </div>
-</div>

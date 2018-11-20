@@ -1,14 +1,13 @@
 <?php
 session_start();
 include_once 'configuration.php';
-include_once 'model/users.php';
 include_once 'controller/profilCtrl.php';
 include_once 'views/header.php';
 ?>   
 <div class="container">
-<div id="infoBoxShadow">
+    <div id="infoBoxShadow">
         <h1>Votre profil</h1>
-</div>
+    </div>
     <div class="alert" id="newUser">
         <p><?= $user->lastname ?></p>
         <p><?= $user->firstname ?></p>
@@ -47,7 +46,7 @@ include_once 'views/header.php';
         </div>
 
         <!--Modification du compte-->
-        
+
         <button type="button" class="btn grey" id="modifUser">Modifier</button>
         <div class="modal fade bd-example-modal-lg" id="userModifModal" role="dialog">
             <div class="modal-dialog modal-lg">
@@ -61,55 +60,52 @@ include_once 'views/header.php';
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form class="col-6" id="formModifUser" action="#" method="POST">
-       
-                            <!--Phone Number input -->
-                            <div class="form-group col-md-6">
-                                <label for="phone"><?= REGISTER_PHONENUMBER ?></label>
-                                <input id="phone" name="phone" value="<?= $user->phone ?>" />
-                                <p class="text-danger"><?= isset($formError['phone']) ? $formError['phone'] : ''; ?></p>
-                            </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <form class="col-md-6" id="formModifUser" action="#" method="POST">
 
-                            <!--Email input -->
-                            <div class="form-group col-md-6">
-                                <label for="mail"><?= REGISTER_MAIL ?></label>
-                                <input id="mail" type="text" name="mail" value="<?= $user->mail ?>" />
-                                <p class="text-danger"><?= isset($formError['mail']) ? $formError['mail'] : ''; ?></p>
-                            </div>
+                                    <!--Phone Number input -->
+                                    <div class="form-group col-md-6">
+                                        <label for="phone"><?= REGISTER_PHONENUMBER ?></label>
+                                        <input id="phone" name="phone" value="<?= $user->phone ?>" />
+                                        <p class="text-danger"><?= isset($formError['phone']) ? $formError['phone'] : ''; ?></p>
+                                    </div>
 
-                            <div class="form-group col-md-6">
-                                <label for="address"><?= REGISTER_ADDRESS ?></label>
-                                <input type="address" name="address" id="address" value="<?= $user->address ?>"/>
-                                <p class="text-danger"><?= isset($formError['address']) ? $formError['address'] : ''; ?></p>
-                            </div>
+                                    <!--Email input -->
+                                    <div class="form-group col-md-6">
+                                        <label for="mail"><?= REGISTER_MAIL ?></label>
+                                        <input id="mail" type="text" name="mail" value="<?= $user->mail ?>" />
+                                        <p class="text-danger"><?= isset($formError['mail']) ? $formError['mail'] : ''; ?></p>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifUser" value="Modification de l'utilisateur" />
+                                    </div>
+                                </form>
+                                <form class="col-6" id="formModifUser" action="#" method="POST">
+                                    <div class="form-group col-md-6">
+                                        <label for="oldPassword"><?= REGISTER_OLDPASSWORD ?></label>
+                                        <input type="password"  id="oldPassword" name="oldPassword"/>
+                                        <p class="text-danger"><?= isset($mdpError['oldPassword']) ? $mdpError['oldPassword'] : ''; ?></p>
 
-                            <div class="form-group col-md-6">
-                                <label for="city"><?= REGISTER_CITY ?></label>
-                                <input type="city" name="city" id="city" value="<?= $user->city ?>"/>
-                                <p class="text-danger"><?= isset($formError['city']) ? $formError['city'] : ''; ?></p>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="password"><?= REGISTER_PASSWORD ?></label>
+                                        <input type="password" name="password" id="password" />
+                                        <p class="text-danger"><?= isset($mdpError['password']) ? $mdpError['password'] : ''; ?></p>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="passwordVerify"><?= REGISTER_PASSWORD_VERIFY ?></label>
+                                        <input type="password" name="passwordVerify" id="passwordVerify" />
+                                        <p class="text-danger"><?= isset($mdpError['password']) ? $mdpError['password'] : ''; ?></p>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifPassword" value="Modification du mot de passe" />
+                                    </div>
+                                </form>
                             </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="postalCode"><?= REGISTER_POSTALCODE ?></label>
-                                <input type="postalCode" name="postalCode" id="postalCode" value="<?= $user->postalCode ?>"/>
-                                <p class="text-danger"><?= isset($formError['postalCode']) ? $formError['postalCode'] : ''; ?></p>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="password"><?= REGISTER_PASSWORD ?></label>
-                                <input type="password" name="password" id="password" value="<?= $user->password ?>"/>
-                                <p class="text-danger"><?= isset($formError['password']) ? $formError['password'] : ''; ?></p>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="passwordVerify"><?= REGISTER_PASSWORD_VERIFY ?></label>
-                                <input type="password" name="passwordVerify" id="passwordVerify" value="<?= $user->password ?>"/>
-                                <p class="text-danger"><?= isset($formError['password']) ? $formError['password'] : ''; ?></p>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                            <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifUser" value="Modification de l'utilisateur" />
                         <button id="btnDismiss" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                     </div>
                 </div>

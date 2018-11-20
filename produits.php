@@ -5,8 +5,7 @@ include'controller/produitsCtrl.php';
 include'views/header.php';
 ?>
 <body>
-    <!-- Caroussel-->  
-
+<!-- Page produits -->
     <div class="container">
         <div class="row justify-content-between">
 <?php foreach ($productList as $products) { ?>
