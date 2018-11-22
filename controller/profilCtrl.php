@@ -73,7 +73,7 @@ if (isset($_POST['modifPassword'])) {
     }
     if (count($mdpError) == 0) {
         $modifPassword = $user->modifyPassword();
-        if ($user->modifyUser()) {
+        if ($user->modifyPassword()) {
             header('Location:index.php');
         }
     }

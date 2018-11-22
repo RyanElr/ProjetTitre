@@ -13,7 +13,7 @@ include'views/header.php';
                     <img id="zoom" class="cardManga" src="assets/img/<?= $products->imgUrl ?>" height="300"/>
                     <div class="card-body"><h2 class="card-text"><?= $products->title ?></h2></div>
                     <div class="card-body"><p class="card-text"><?= $products->price ?>€</p></div>
-                    <button type="button" data-qt="1" data-id="<?= $products->id ?>" data-title="<?= $products->title ?>" data-price="<?= $products->price ?>" id="n1" class="add-to-cart btn btn-outline-primary btn-lg w-100">AJOUTER AU PANIER</button></div>
+                    <button type="button" <?php $count++ ?> data-qt="1" data-id="<?= $products->id ?>" data-title="<?= $products->title ?>" data-price="<?= $products->price ?>" id="n1" class="add-to-cart btn btn-outline-primary btn-lg w-100">AJOUTER AU PANIER</button></div>
 <?php } ?>
         </div>
     </div>

@@ -10,8 +10,12 @@ $(document).ready(function () {
     $("#myBtn").click(function () {
         $("#myModal").modal();
     });
-});
-
+});  
+var panier = 0;
+$('.add-to-cart').click(function() {
+    panier++;
+$('#panerInc').val(panier);
+ });
 //Modal pour supprimer un utilisateur
 
 $(document).ready(function () {
@@ -50,6 +54,7 @@ $(document).ready(function () {
     function scrollFunction() {
         if (document.documentElement.scrollTop > 700) {
             document.getElementById("btn7").style.display = "block";
+            var speed = 800;
         } else {
             document.getElementById("btn7").style.display = "none";
         }
@@ -64,17 +69,17 @@ function alertNewUser() {
 
 //////////////////// SHOPPING /////////////////////
 
-$('.add-to-cart').click(function () {
-    var id = $(this).attr('data-id');
-    var name = $(this).attr('data-title');
-    var price = $(this).attr('data-price');
-    var selectq = '<select id="qt"><option value="1">' + 1 + '</option><option value="2">' + 2 + '</option><option value="3">' + 3 + '</option><option value="4">' + 4 + '</option></select>';
-    var qt = $('#qt').val($('#qt option:selected'));
-    var totalprice = parseInt(price) * parseInt(qt) + '€';
-    var totalcommande = parseInt(price);
-    console.log(id);
-       console.log(qt);
-          console.log(price);
-    $('.afficherPanier').append('<tr><td>' + id + '</td><td>' + name + '</td><td>' + price + '€</td><td>' + selectq + '</td><td>' + totalprice + '</td></tr>');
-});
-
+// $('.add-to-cart').click(function () {
+//    var id = $(this).attr('data-id');
+//    var name = $(this).attr('data-title');
+//    var price = $(this).attr('data-price');
+//    var selectq = '<select id="qt"><option selected value="1">' + 1 + '</option><option value="2">' + 2 + '</option><option value="3">' + 3 + '</option><option value="4">' + 4 + '</option></select>';
+//    var qt = $('#qt option:selected').val();
+//    var totalprice = parseInt(price) * parseInt(qt) + '€';
+//    var totalcommande = parseInt(price);
+//    console.log(id);
+//       console.log(qt);
+//          console.log(price);
+//    $('.afficherPanier').append('<tr><td>' + id + '</td><td>' + name + '</td><td>' + price + '€</td><td>' + selectq + '</td><td>' + totalprice + '</td></tr>');
+//});
+//

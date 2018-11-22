@@ -13,7 +13,9 @@ $formError = array();
 $product = NEW produits();
 $product->getProductsListByTypes();
 $product->getProductsListByCategories();
+$newProduct = $product->getProductsLists();
 if (isset($_POST['register'])) {
+    // Vérification de la catégorie celon la regex
     if (!empty($_POST['category'])) {
         if (preg_match($regexNumber, $_POST['category'])) {
             $product->id_categories = htmlspecialchars($_POST['category']);
@@ -23,7 +25,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['category'] = 'Veuillez indiquer la catégorie';
     }
-
+// Vérification du type celon la regex
     if (!empty($_POST['type'])) {
         if (preg_match($regexNumber, $_POST['type'])) {
             $product->id_types = htmlspecialchars($_POST['type']);
@@ -33,7 +35,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['type'] = 'Veuillez indiquer le type';
     }
-    // Vérification du nom de famille celon la regex
+    // Vérification du titre celon la regex
     if (!empty($_POST['title'])) {
         if (preg_match($regexName, $_POST['title'])) {
             $product->title = htmlspecialchars($_POST['title']);
@@ -43,7 +45,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['title'] = 'Veuillez indiquer un titre';
     }
-    // Vérification du prénom celon la regex
+    // Vérification du prix celon la regex
     if (!empty($_POST['price'])) {
         if (preg_match($regexNumber, $_POST['price'])) {
             $product->price = htmlspecialchars($_POST['price']);
@@ -53,7 +55,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['price'] = 'Veuillez indiquer votre prix';
     }
-    // Vérification de l'adresse postal celon la regex
+    // Vérification de l'image celon la regex
     if (!empty($_POST['imgUrl'])) {
         if (preg_match($regexImg, $_POST['imgUrl'])) {
             $product->imgUrl = htmlspecialchars($_POST['imgUrl']);
@@ -68,6 +70,9 @@ if (isset($_POST['register'])) {
     if (count($formError) == 0) {
         if (!$product->productsRegister()) {
             $formError['register'] = 'Il y a eu un problème';
+        }
+        else {
+            header('Location:changeAndDeleteProducts.php');
         }
     }
 }

@@ -37,17 +37,22 @@ include_once 'views/header.php';
                                             <div class="form-group col-md-6">
                                                 <select name="userType">
                                                     <option disabled="Type" selected>Rôle</option>
-                                                    <option name="userType" value="2" >2 : Client</option>
-                                                    <option name="userType" value="3" >3 : Modérateur</option>
+                                                    <option name="userType" value="2" >Client</option>
+                                                    <option name="userType" value="3" >Modérateur</option>
                                                 </select>
                                             </div>
 
                                             <!--Email input -->
                                             <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifRole" value="Modification de l'utilisateur" />
-                                    </form>
-                                            <div class="form-group col-md-6">
-                                                <p>Id rôle : <?= $usersProfil->userType ?></p>
-                                            </div>
+                                        </form>
+                                        <div class="form-group col-md-6">
+                                            <?php $role = $usersProfil->userType;
+                                            if ($role == 2) { ?>
+                                                <p>Client</P>
+                                            <?php } if ($role == 3) { ?>
+                                                <p>Modérateur</p>
+                                                <?php } ?>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -60,13 +65,13 @@ include_once 'views/header.php';
                 </div>
             </div>
     <?php } ?>
-        </div>
+    </div>
 <?php } else if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 3) { ?>
     <div class="container">
         <div id="infoBoxShadow">
             <h1>Tout les profils</h1>
         </div>
-        <?php foreach ($getAllUsersProfil as $usersProfil) { ?>
+    <?php foreach ($getAllUsersProfil as $usersProfil) { ?>
             <div class="alert" id="allUsersProfil">
                 <p><?= $usersProfil->lastname ?></p>
                 <p><?= $usersProfil->firstname ?></p>
@@ -75,7 +80,8 @@ include_once 'views/header.php';
                 </form>
             </div>
         </div>
-    <?php }
+    <?php
+    }
 } else {
     ?>
     <div class="container">

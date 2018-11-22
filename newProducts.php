@@ -4,6 +4,8 @@ include_once 'configuration.php';
 include_once 'model/model.php';
 include_once 'controller/newProductsCtrl.php';
 include_once 'views/header.php';
+?>
+<?php
 if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 1 || isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 3) {
     ?>
     <form action="#" method="POST">

@@ -16,3 +16,6 @@ if (isset($_POST['search'])){
         $product->search = $_POST['search'];
         $productList = $product->searchProducts();
     }
+   
+
+    

@@ -121,7 +121,7 @@ class users extends database {
     public function searchUsers() {
         $result = array();
         $remove = $this->db->prepare('SELECT `id`, `lastname`, `firstname`  FROM `DFD54Z_users` '
-                . 'WHERE `lastname` LIKE :lastname AND `firstname` LIKE :firstname');
+                . 'WHERE `lastname` LIKE :lastname OR `firstname` LIKE :firstname');
         $remove->bindValue(':lastname', '%' . $this->search . '%', PDO::PARAM_STR);
         $remove->bindValue(':firstname', '%' . $this->search . '%', PDO::PARAM_STR);
         if ($remove->execute()) {
@@ -168,17 +168,6 @@ class users extends database {
         $remove = $this->db->prepare($query);
         $remove->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $remove->execute();
-    }
-
-    public function registerDeliveryAddress() {
-        $query = 'INSERT INTO `DFD54Z_delivery` (`city`, `postalCode`, `address`)'
-                . 'VALUES (:city , :postalCode , :address) ';
-        $add = $this->db->prepare($query);
-        $add->bindValue(':id', $this->id, PDO::PARAM_INT);
-        $add->bindValue(':city', $this->city, PDO::PARAM_STR);
-        $add->bindValue(':postalCode', $this->postalCode, PDO::PARAM_STR);
-        $add->bindValue(':address', $this->address, PDO::PARAM_STR);
-        return $add->execute();
     }
 
     public function __destruct() {

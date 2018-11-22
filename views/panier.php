@@ -37,6 +37,7 @@
                     <a href="../login.php"><button type="button" id="redirectConnection" class="btn btn-default"><?= PANER_NOTCONNECTED ?></button></a>
                 <?php } else { ?>
                     <button type="button" class="btn btn-default" data-dismiss="modal"><?= PANER_CONTINUE ?></button>
+                    <a href="../deliveryAddress.php"><button type="button" class="btn btn-default"><?= PANER_BUY ?></button></a>
                 <?php } ?>
 
             </div>

@@ -17,101 +17,110 @@ include_once 'views/header.php';
         <p><?= $user->address ?></p>
         <p><?= $user->postalCode ?></p>
         <p><?= $user->city ?></p>
+        <?php $role = $user->userType ;
+        if ($role == 2) {
+            ?>
+            <p>Client</P>
+        <?php } if ($role == 3) { ?>
+            <p>Modérateur</p>
+            <?php } if ($role == 1) { ?>
+            <p>Administrateur</p>
+<?php } ?>
 
-        <!--Modal de suppression de compte -->
+    <!--Modal de suppression de compte -->
 
-        <button type="button" class ="btn btn-danger" id="removeUser">Supprimer le compte</button>
-        <div class="modal fade" id="userModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Suppression de compte</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Êtes-vous sûr de vouloir supprimer votre compte?</p>                
-                    </div>
-                    <div class="modal-footer">
-                        <form method="POST" action="?idRemove=<?= $user->id ?> ?disconnect">
-                            <input class="btn btn-danger" type="submit" value="Supprimer" name="submit" />
-                        </form>
-                        <input type="submit" value="Annuler" data-dismiss="modal" />
-                    </div>
+    <button type="button" class ="btn btn-danger" id="removeUser">Supprimer le compte</button>
+    <div class="modal fade" id="userModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Suppression de compte</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                </li>
+                <div class="modal-body">
+                    <p>Êtes-vous sûr de vouloir supprimer votre compte?</p>                
+                </div>
+                <div class="modal-footer">
+                    <form method="POST" action="?idRemove=<?= $user->id ?> ?disconnect">
+                        <input class="btn btn-danger" type="submit" value="Supprimer" name="submit" />
+                    </form>
+                    <input type="submit" value="Annuler" data-dismiss="modal" />
+                </div>
             </div>
+
         </div>
+    </div>
 
-        <!--Modification du compte-->
+    <!--Modification du compte-->
 
-        <button type="button" class="btn grey" id="modifUser">Modifier</button>
-        <div class="modal fade bd-example-modal-lg" id="userModifModal" role="dialog">
-            <div class="modal-dialog modal-lg">
+    <button type="button" class="btn grey" id="modifUser">Modifier</button>
+    <div class="modal fade bd-example-modal-lg" id="userModifModal" role="dialog">
+        <div class="modal-dialog modal-lg">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Modification de l'utilisateur</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <form class="col-md-6" id="formModifUser" action="#" method="POST">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Modification de l'utilisateur</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <form class="col-md-6" id="formModifUser" action="#" method="POST">
 
-                                    <!--Phone Number input -->
-                                    <div class="form-group col-md-6">
-                                        <label for="phone"><?= REGISTER_PHONENUMBER ?></label>
-                                        <input id="phone" name="phone" value="<?= $user->phone ?>" />
-                                        <p class="text-danger"><?= isset($formError['phone']) ? $formError['phone'] : ''; ?></p>
-                                    </div>
+                                <!--Phone Number input -->
+                                <div class="form-group col-md-6">
+                                    <label for="phone"><?= REGISTER_PHONENUMBER ?></label>
+                                    <input id="phone" name="phone" value="<?= $user->phone ?>" />
+                                    <p class="text-danger"><?= isset($formError['phone']) ? $formError['phone'] : ''; ?></p>
+                                </div>
 
-                                    <!--Email input -->
-                                    <div class="form-group col-md-6">
-                                        <label for="mail"><?= REGISTER_MAIL ?></label>
-                                        <input id="mail" type="text" name="mail" value="<?= $user->mail ?>" />
-                                        <p class="text-danger"><?= isset($formError['mail']) ? $formError['mail'] : ''; ?></p>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifUser" value="Modification de l'utilisateur" />
-                                    </div>
-                                </form>
-                                <form class="col-6" id="formModifUser" action="#" method="POST">
-                                    <div class="form-group col-md-6">
-                                        <label for="oldPassword"><?= REGISTER_OLDPASSWORD ?></label>
-                                        <input type="password"  id="oldPassword" name="oldPassword"/>
-                                        <p class="text-danger"><?= isset($mdpError['oldPassword']) ? $mdpError['oldPassword'] : ''; ?></p>
+                                <!--Email input -->
+                                <div class="form-group col-md-6">
+                                    <label for="mail"><?= REGISTER_MAIL ?></label>
+                                    <input id="mail" type="text" name="mail" value="<?= $user->mail ?>" />
+                                    <p class="text-danger"><?= isset($formError['mail']) ? $formError['mail'] : ''; ?></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifUser" value="Modification de l'utilisateur" />
+                                </div>
+                            </form>
+                            <form class="col-6" id="formModifUser" action="#" method="POST">
+                                <div class="form-group col-md-6">
+                                    <label for="oldPassword"><?= REGISTER_OLDPASSWORD ?></label>
+                                    <input type="password"  id="oldPassword" name="oldPassword"/>
+                                    <p class="text-danger"><?= isset($mdpError['oldPassword']) ? $mdpError['oldPassword'] : ''; ?></p>
 
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="password"><?= REGISTER_PASSWORD ?></label>
-                                        <input type="password" name="password" id="password" />
-                                        <p class="text-danger"><?= isset($mdpError['password']) ? $mdpError['password'] : ''; ?></p>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="passwordVerify"><?= REGISTER_PASSWORD_VERIFY ?></label>
-                                        <input type="password" name="passwordVerify" id="passwordVerify" />
-                                        <p class="text-danger"><?= isset($mdpError['password']) ? $mdpError['password'] : ''; ?></p>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifPassword" value="Modification du mot de passe" />
-                                    </div>
-                                </form>
-                            </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="password"><?= REGISTER_PASSWORD ?></label>
+                                    <input type="password" name="password" id="password" />
+                                    <p class="text-danger"><?= isset($mdpError['password']) ? $mdpError['password'] : ''; ?></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="passwordVerify"><?= REGISTER_PASSWORD_VERIFY ?></label>
+                                    <input type="password" name="passwordVerify" id="passwordVerify" />
+                                    <p class="text-danger"><?= isset($mdpError['password']) ? $mdpError['password'] : ''; ?></p>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifPassword" value="Modification du mot de passe" />
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button id="btnDismiss" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnDismiss" type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 </div>
             </div>
         </div>
-        <!-- Fin modif Client -->
     </div>
+    <!-- Fin modif Client -->
+</div>
 </div>
 <?php include_once 'views/footer.php'; ?>

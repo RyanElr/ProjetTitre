@@ -37,5 +37,11 @@ if (isset($_POST['modifRole'])) {
         if ($user->modifyRole()) {
             $message = 'Le rôle de l\'utilisateur a bien été modifier';
         }
+        header('Location:allProfils.php');
     }
 }
+if (isset($_POST['search'])){
+    $user = new users();
+        $user->search = $_POST['search'];
+        $getAllUsersProfil = $user->searchUsers();
+    }

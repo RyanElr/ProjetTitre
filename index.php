@@ -9,6 +9,7 @@ include 'views/header.php' ?>
         <div class="row">
             <img id="imgManga" src="assets/img/1325788.png.jpeg">
         </div>
+        <?php if (!isset($_SESSION['isConnect']) || isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 2) { ?>
         <div class="col-md-12 mt-3">
             <h3>Meilleures ventes</h3>
         </div>
@@ -24,6 +25,7 @@ include 'views/header.php' ?>
                 <?php } ?>
                 </div>
         </div>
+        <?php } ?>
         <script src="assets/js/script.js"></script>
         <a href="#Img1" id="btn7" class="js-scrollTo"><img id="btn8" src="../assets/icon/dbz.png"/></a>
        <?php include 'views/footer.php';?>

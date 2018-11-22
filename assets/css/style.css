@@ -15,6 +15,13 @@ nav{
     margin: auto;
     transition: 0.2s;
 }
+#body{
+     width: 100%;
+    top:0;
+    z-index:1000;
+   
+    margin: 0;
+}
 /* Navbar style */
 .navbar{
     padding: 0;
@@ -61,14 +68,6 @@ nav{
     border-radius: 10%;
     color: white;
     background-color: #072F54;
-}
-
-.ec1{
-    width: 100%;
-    top:0;
-    z-index:1000;
-    background-image:url(../img/739916-awesome-background-images.jpg) ;
-    margin: 0;
 }
 .icon{
     background-color: #333333;
@@ -242,4 +241,7 @@ form{
 }
 #modifUserType:hover{
     background-color : #0069D9;
+}
+#deleteProduct{
+    align-content: center;
 }

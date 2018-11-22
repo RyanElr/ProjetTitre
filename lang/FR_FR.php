@@ -41,5 +41,6 @@ define('NAV_ENGLISH','Anglais');
 define('PANER_TITLE', 'Bienvenue dans votre panier');
 define('PANER_BODY', 'Votre panier est vide');
 define('PANER_CONTINUE', 'Continuer les achats');
+define('PANER_BUY', 'Paiement');
 define('PANER_NOTCONNECTED', 'Se connecter');
 
