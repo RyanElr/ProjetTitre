@@ -1,23 +1,23 @@
 <?php
 
 $product = new produits();
-$productList = $product->getProductsList();
+$productList = $product->getProductsListWithCategoriesAndTypes();
 if (isset($_POST['deleteProduct'])) {
 //Condition de vérification pour l'id
     if (isset($_GET['idRemove'])) {
         $product->id = $_GET['idRemove'];
         //Utilisation de la méthode de suppression
         $removeEachProduct = $product->removeProduct();
-        if($product->removeProduct()){
-        header('location:#');
+        if ($product->removeProduct()) {
+            header('location:#');
         }
     }
 }
-if (isset($_POST['search'])){
+if (isset($_POST['search'])) {
     $product = new produits();
-        $product->search = $_POST['search'];
-        $productList = $product->searchProducts();
-    }
+    $product->search = $_POST['search'];
+    $productList = $product->searchProducts();
+}
 $regexPhoneNumber = '/^[0][1-9][0-9]{8}$/';
 $regexPostalCode = '/^[0-9]{5}$/';
 $regexName = '/^[a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-]+$/';
@@ -27,6 +27,7 @@ $regexImg = '/^[A-z0-9._%+-]+[A-z]{2,4}$/';
 $regexAddress = '/^[A-z\ 0-9\']+$/';
 $regexNumberLetter = '/^[0-9A-z]+$/';
 $regexNumber = '/^[0-9]+$/';
+$regexNumberPrice = '/^[0-9]*.[0-9]{2}+$/';
 $formError = array();
 $mdpError = array();
 if (isset($_POST['modifProduct'])) {
@@ -43,7 +44,7 @@ if (isset($_POST['modifProduct'])) {
     }
     // Vérification du prénom celon la regex
     if (!empty($_POST['price'])) {
-        if (preg_match($regexNumber, $_POST['price'])) {
+        if (preg_match($regexNumberPrice, $_POST['price'])) {
             $product->price = htmlspecialchars($_POST['price']);
         } else {
             $formError['price'] = 'La saisie de votre prix est invalide';

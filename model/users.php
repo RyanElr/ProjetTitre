@@ -3,7 +3,6 @@
 class users extends database {
 
     public $id = 0;
-    public $login = '';
     public $password = '';
     public $mail = '';
     public $lastname = '';
@@ -25,6 +24,17 @@ class users extends database {
      * Méthode permettant de faire la connexion de l'utilisateur
      * @return boolean
      */
+        public function checkIfUserExist(){
+        $state = false;
+        $query = 'SELECT COUNT(`id`) AS `count` FROM `DFD54Z_users` WHERE `mail` = :mail';
+        $result = $this->db->prepare($query);
+        $result->bindValue(':mail', $this->mail, PDO::PARAM_STR);
+        if ($result->execute()) {
+            $selectResult = $result->fetch(PDO::FETCH_OBJ);
+            $state = $selectResult->count;
+        }
+        return $state;
+    }
     public function userConnection() {
         $state = false;
         $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `userType` FROM `DFD54Z_users` WHERE `mail` = :mail';
@@ -78,7 +88,7 @@ class users extends database {
     public function getAllUsersProfilAsAdministrator() {
 
         $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `mail`, `userType`,DATE_FORMAT(birthdate, "%d/%m/%Y") AS birthdate FROM `DFD54Z_users` '
-                . 'WHERE `userType` = 2 OR  `userType` = 3';
+                . 'WHERE `userType` = 2 OR `userType` = 3';
         $result = $this->db->prepare($query);
         if ($result->execute()) { //On vérifie que la requête s'est bien exécutée
             $selectResult = $result->fetchAll(PDO::FETCH_OBJ);
@@ -120,8 +130,20 @@ class users extends database {
 
     public function searchUsers() {
         $result = array();
-        $remove = $this->db->prepare('SELECT `id`, `lastname`, `firstname`  FROM `DFD54Z_users` '
-                . 'WHERE `lastname` LIKE :lastname OR `firstname` LIKE :firstname');
+        $remove = $this->db->prepare('SELECT `id`, `lastname`, `firstname`, `userType` FROM `DFD54Z_users`'
+                . 'WHERE (`userType` = 2 OR `userType` = 3)  '
+                . 'AND (`lastname` LIKE :lastname OR `firstname` LIKE :firstname )');
+        $remove->bindValue(':lastname', '%' . $this->search . '%', PDO::PARAM_STR);
+        $remove->bindValue(':firstname', '%' . $this->search . '%', PDO::PARAM_STR);
+        if ($remove->execute()) {
+            $result = $remove->fetchAll(PDO::FETCH_OBJ);
+        }
+        return $result;
+    }
+    public function searchUsersAsModerator() {
+        $result = array();
+        $remove = $this->db->prepare('SELECT `id`, `lastname`, `firstname`, `userType` FROM `DFD54Z_users`'
+                . 'WHERE `userType` = 2 AND (`lastname` LIKE :lastname OR `firstname` LIKE :firstname)');
         $remove->bindValue(':lastname', '%' . $this->search . '%', PDO::PARAM_STR);
         $remove->bindValue(':firstname', '%' . $this->search . '%', PDO::PARAM_STR);
         if ($remove->execute()) {

@@ -1,4 +1,6 @@
 <?php
+
+$message = '';
 $regexPhoneNumber = '/^[0][1-9][0-9]{8}$/';
 $regexPostalCode = '/^[0-9]{5}$/';
 $regexName = '/^[a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-]+$/';
@@ -8,9 +10,10 @@ $regexMail = '/^[A-z0-9._%+-]+[\@]{1}[A-z0-9.-]+[\.]{1}[A-z]{2,4}$/';
 $regexAddress = '/^[A-z\ 0-9\']+$/';
 $regexNumberLetter = '/^[0-9A-z]+$/';
 $formError = array();
+$user = new users();
 if (isset($_POST['register'])) {
     $user = NEW users();
-     // Vérification du nom de famille celon la regex
+    // Vérification du nom de famille celon la regex
     if (!empty($_POST['lastname'])) {
         if (preg_match($regexName, $_POST['lastname'])) {
             $user->lastname = htmlspecialchars($_POST['lastname']);
@@ -20,7 +23,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['lastname'] = 'Veuillez indiquer votre nom';
     }
- // Vérification du prénom celon la regex
+    // Vérification du prénom celon la regex
     if (!empty($_POST['firstname'])) {
         if (preg_match($regexName, $_POST['firstname'])) {
             $user->firstname = htmlspecialchars($_POST['firstname']);
@@ -30,7 +33,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['firstname'] = 'Veuillez indiquer votre prénom';
     }
-     // Vérification de la date de naissance celon la regex
+    // Vérification de la date de naissance celon la regex
     if (!empty($_POST['birthdate'])) {
         if (preg_match($regexDate, $_POST['birthdate'])) {
             $user->birthdate = htmlspecialchars($_POST['birthdate']);
@@ -40,7 +43,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['birthdate'] = 'Veuillez indiquer votre Date de naissance';
     }
- // Vérification du numéro de téléphone celon la regex
+    // Vérification du numéro de téléphone celon la regex
     if (!empty($_POST['phone'])) {
         if (preg_match($regexPhoneNumber, $_POST['phone'])) {
             $user->phone = htmlspecialchars($_POST['phone']);
@@ -50,7 +53,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['phone'] = 'Veuillez indiquer votre numéro de téléphone';
     }
- // Vérification de l'adresse mail celon la regex
+    // Vérification de l'adresse mail celon la regex
     if (!empty($_POST['mail'])) {
         if (preg_match($regexMail, $_POST['mail'])) {
             $user->mail = htmlspecialchars($_POST['mail']);
@@ -60,7 +63,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['mail'] = 'Veuillez indiquer votre mail';
     }
-     // Vérification de la civilité celon la regex
+    // Vérification de la civilité celon la regex
     if (!empty($_POST['civility'])) {
         if (preg_match($regexName, $_POST['civility'])) {
             $user->civility = htmlspecialchars($_POST['civility']);
@@ -70,7 +73,7 @@ if (isset($_POST['register'])) {
     } else {
         $formError['civility'] = 'Veuillez indiquer votre civilité';
     }
-     // Vérification du mot de passe
+    // Vérification du mot de passe
     if (!empty($_POST['password']) && !empty($_POST['passwordVerify']) && $_POST['password'] == $_POST['passwordVerify']) {
         $user->password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         //si les champs sont vides ou s'il ne sont pas identiques affichage d'un message d'erreur
@@ -79,8 +82,15 @@ if (isset($_POST['register'])) {
     }
     // Si tout le formulaire est correct , nous envoyons les données vers la base de données.
     if (count($formError) == 0) {
-        if (!$user->userRegister()) {
-            $formError['register'] = 'Il y a eu un problème';
+        $user->checkIfUserExist();
+        if ($user->checkIfUserExist() == 0) {
+            if (!$user->userRegister()) {
+                $formError['register'] = 'Il y a eu un problème';
+            } else {
+                header('Location:login.php');
+            }
+        } else {
+            $message = 'Adresse mail déjà utilisée';
         }
     }
 }

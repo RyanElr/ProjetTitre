@@ -11,6 +11,7 @@ include'views/header.php';
                 <div class="col-md-4 col-lg-4 col-sm-6 col-xs-6 shadow p-3 mb-5 bg-black rounded">
                     <img id="zoom" class="cardManga" src="assets/img/<?= $products->imgUrl ?>" height="300"/>
                     <div class="card-body"><h2 class="card-text"><?= $products->title ?></h2></div>
+                    <div class="card-body"><p class="card-text"><?= $products->categoryName ?></p></div>
                     <div class="card-body"><p class="card-text"><?= $products->price ?>€</p></div>
                     <button type="button" class="col-12 btn btn-primary btn-md" data-toggle="modal" data-target="#modifProductModal<?= $products->id ?>"  name="modifProduct">Modification du produit</button>
                     <div class="modal fade bd-example-modal-lg" id="modifProductModal<?= $products->id ?>" role="dialog">
@@ -39,9 +40,9 @@ include'views/header.php';
                                                 <div class="form-group col-md-6">
                                                     <select name="type">
                                                         <option disabled="Type" selected>Type</option>
-                                                        <option name="type" value="1" >Dragon Ball</option>
-                                                        <option name="type" value="2" >Naruto</option>
-                                                        <option name="type" value="3" >One Piece</option>
+                                                        <option name="type" value="<?= $products->id_types ?>" >Dragon Ball</option>
+                                                        <option name="type" value="<?= $products->id_types ?>" >Naruto</option>
+                                                        <option name="type" value="<?= $products->id_types ?>" >One Piece</option>
                                                     </select>
                                                 </div>
                                                 <!--Phone Number input -->
@@ -59,7 +60,7 @@ include'views/header.php';
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label for="imgUrl">Image : </label>
-                                                    <input id="imgUrl" type="file" name="imgUrl" value="<?= isset($imgUrl) ? $imgUrl : '' ?>" />
+                                                    <input id="imgUrl" type="file" name="imgUrl" value="<?= $products->imgUrl ?>" />
                                                     <p class="text-danger"><?= isset($formError['imgUrl']) ? $formError['imgUrl'] : ''; ?></p>
                                                 </div>
                                                 <!--Email input -->

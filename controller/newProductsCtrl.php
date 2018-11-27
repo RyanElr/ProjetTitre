@@ -9,11 +9,10 @@ $regexImg = '/^[A-z0-9._%+-]+[A-z]{2,4}$/';
 $regexAddress = '/^[A-z\ 0-9\']+$/';
 $regexNumberLetter = '/^[0-9A-z]+$/';
 $regexNumber = '/^[0-9]+$/';
+$regexNumberPrice = '/^[0-9]*.[0-9]{2}+$/';
 $formError = array();
 $product = NEW produits();
-$product->getProductsListByTypes();
-$product->getProductsListByCategories();
-$newProduct = $product->getProductsLists();
+$newProduct = $product->getProductsList();
 if (isset($_POST['register'])) {
     // Vérification de la catégorie celon la regex
     if (!empty($_POST['category'])) {
@@ -47,7 +46,7 @@ if (isset($_POST['register'])) {
     }
     // Vérification du prix celon la regex
     if (!empty($_POST['price'])) {
-        if (preg_match($regexNumber, $_POST['price'])) {
+        if (preg_match($regexNumberPrice, $_POST['price'])) {
             $product->price = htmlspecialchars($_POST['price']);
         } else {
             $formError['price'] = 'La saisie de votre prix est invalide';
@@ -70,8 +69,7 @@ if (isset($_POST['register'])) {
     if (count($formError) == 0) {
         if (!$product->productsRegister()) {
             $formError['register'] = 'Il y a eu un problème';
-        }
-        else {
+        } else {
             header('Location:changeAndDeleteProducts.php');
         }
     }

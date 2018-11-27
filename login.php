@@ -13,9 +13,9 @@ include'views/header.php';
             <label for="password"><?= FORM_PASSWORD ?></label>
             <input type="password" name="password" id="password" />
             <p class="text-danger"><?= isset($formError['password']) ? $formError['password'] : ''; ?></p>
+            <p class="text-danger"><?= $message?></p>
             <input type="submit" name="connect" id="connect" value="<?= FORM_LOGIN_SUBMIT ?>" />
         </div>
-            <p><?= $message?></p>
     </form>
     <?php include 'views/footer.php'; ?>
 </body>

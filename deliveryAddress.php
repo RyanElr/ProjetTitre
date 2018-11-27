@@ -10,9 +10,6 @@ include'views/header.php';
                 <div id="infoBoxShadow">
                     <div class="alert" id="allUsersProfil">
                         <p>Adresse de livraison bien enregistrée</p>
-                        <?php foreach($getDeliveryList as $deliveryAddress){ ?>
-                        <p><?= $deliveryAddress->city ?></p>
-                       <?php } ?>
                     </div>
                 </div>
             </div>
@@ -32,10 +29,11 @@ include'views/header.php';
                         <input type="submit" value="<?= REGISTER_SUBMIT ?>" name="deliveryRegister" />
                     </div>
                 </div>
-            </form>
+            </form>-->
             <?= $message ?>
         <?php }
-    } else { ?>
+    } else {
+        ?>
         <div class="container">
             <div id="infoBoxShadow">
                 <div class="alert" id="allUsersProfil">
@@ -46,4 +44,3 @@ include'views/header.php';
     <?php } ?>
 <?php include 'views/footer.php'; ?>
 </body>
-</html>

@@ -28,6 +28,8 @@ define('ERROR_PASSWORD','Erreur dans la saisie du mot de passe');
 define('ERROR_MAIL','Erreur dans la saisie de l\'adresse mail');
 define('ERROR_LOGIN','Erreur dans la saisie de l\'identifiant');
 define('USER_CONNECTION_SUCCESS','Connecté avec succès');
+define('USER_CONNECTION_MAIL','Cette adresse mail n\'existe pas');
+define('USER_CONNECTION_FAIL','Adresse mail ou mot de passe incorrect');
 define('USER_CONNECTION_ERROR','Erreur lors de la connexion');
 //Menu
 define('NAV_WELCOME','Bienvenue ');

@@ -1,3 +1,4 @@
+
 // Quand l'utilisateur utilise ce bouton ça l'envoie vers le haut de la page
 
 function topFunction() {
@@ -67,19 +68,32 @@ function alertNewUser() {
     alert(" Vous êtes inscris ");
 }
 
-//////////////////// SHOPPING /////////////////////
+//////////////////// SHOPPING ////////////////////
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  var expires = "expires="+d.toUTCString();
+    
+  // règle le pb des caractères interdits
+  if ('btoa' in window) {
+    cvalue = btoa(cvalue);
+  }
+    
+  document.cookie = cname + "=" + cvalue + "; " + expires+';path=/';
+}
 
-// $('.add-to-cart').click(function () {
-//    var id = $(this).attr('data-id');
-//    var name = $(this).attr('data-title');
-//    var price = $(this).attr('data-price');
-//    var selectq = '<select id="qt"><option selected value="1">' + 1 + '</option><option value="2">' + 2 + '</option><option value="3">' + 3 + '</option><option value="4">' + 4 + '</option></select>';
-//    var qt = $('#qt option:selected').val();
-//    var totalprice = parseInt(price) * parseInt(qt) + '€';
-//    var totalcommande = parseInt(price);
-//    console.log(id);
-//       console.log(qt);
-//          console.log(price);
-//    $('.afficherPanier').append('<tr><td>' + id + '</td><td>' + name + '</td><td>' + price + '€</td><td>' + selectq + '</td><td>' + totalprice + '</td></tr>');
-//});
-//
+function saveCart(inCartItemsNum, cartArticles) {
+  setCookie('inCartItemsNum', inCartItemsNum, 5);
+  setCookie('cartArticles', JSON.stringify(cartArticles), 5);
+};
+
+ $('.add-to-cart').click(function () {
+    var id = $(this).attr('data-id');
+    var name = $(this).attr('data-title');
+    var price = $(this).attr('data-price');
+    var selectq = '<select id="qt"><option selected value="1">' + 1 + '</option><option value="2">' + 2 + '</option><option value="3">' + 3 + '</option><option value="4">' + 4 + '</option></select>';
+    var qt = parseInt($('#qt').val());
+    var totalprice = parseInt(price) * parseInt(qt) + '€';
+   $('.afficherPanier').append('<tr><td>' + id + '</td><td>' + name + '</td><td>' + price + '€</td><td>' + selectq + '</td><td>' + totalprice + '</td></tr>');
+});
+

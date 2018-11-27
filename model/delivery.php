@@ -27,9 +27,14 @@ class delivery extends database {
         $add->bindValue(':id', $this->id_users, PDO::PARAM_INT);
         return $add->execute();
     }
+    
+     /**
+     * Méthode permettant d'afficher une adresse de livraison
+     * @return boolean
+     */
         public function getDeliveryAddressByClient() {
         $state = false;
-        $query = 'SELECT `city`, `postalCode`, `address` FROM `DFD54Z_delivery` WHERE `id_users` = :id';
+        $query = 'SELECT `city`, `postalCode`, `address` FROM `DFD54Z_delivery` WHERE `id_;users` = :id';
         $result = $this->db->prepare($query);
         $result->bindValue(':id', $this->id_users, PDO::PARAM_INT);
         if ($result->execute()) { //On vérifie que la requête s'est bien exécutée
@@ -44,6 +49,7 @@ class delivery extends database {
         }
         return $state;
     }
+    
 
     public function __destruct() {
         

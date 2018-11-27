@@ -3,7 +3,7 @@
 /**
  * Création de la classe clients
  */
-class produits extends database{
+class produits extends database {
 
     public $id;
     public $lastName;
@@ -21,6 +21,10 @@ class produits extends database{
         $this->dbConnect();
     }
 
+    /*
+     * Méthode permettant d'afficher les produits du moment dans l'index.
+     */
+
     public function getBestSellersList() {
         $isObjectResult = array();
         $PDOResult = $this->db->query('SELECT `id`, `title`, `price`, `imgUrl`'
@@ -37,7 +41,7 @@ class produits extends database{
     }
 
     /**
-     * Méthode getClientsList pour récupérer le résultat de la requête
+     * Méthode pour chercher un produit
      * @return type
      */
     public function searchProducts() {
@@ -51,6 +55,10 @@ class produits extends database{
         return $result;
     }
 
+    /*
+     * Méthode pour enregistrer un produit
+     */
+
     public function productsRegister() {
         $query = 'INSERT INTO `DFD54Z_products`(`title`, `price`, `imgUrl`, `id_categories`, `id_types`) '
                 . 'VALUES (:title, :price, :imgUrl, :category, :type)';
@@ -62,6 +70,10 @@ class produits extends database{
         $insertUsers->bindValue(':type', $this->id_types, PDO::PARAM_INT);
         return $insertUsers->execute();
     }
+
+    /*
+     * Méthode permettant de récupérer la catégorie du produit
+     */
 
     public function getProductsListByCategory() {
         $isObjectResult = array();
@@ -79,13 +91,17 @@ class produits extends database{
         return $isObjectResult;
     }
 
+    /*
+     * Méthode permettant de récupérer la catégorie et le type du produit
+     */
+
     public function getProductsListByCategoryAndType() {
         $isObjectResult = array();
         $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
                 . ' FROM `DFD54Z_products`'
                 . 'WHERE id_types = :type AND id_categories = :category');
         $PDOResult->bindValue(':type', $this->id_types, PDO::PARAM_INT);
-         $PDOResult->bindValue(':category', $this->id_categories, PDO::PARAM_INT);
+        $PDOResult->bindValue(':category', $this->id_categories, PDO::PARAM_INT);
         $PDOResult->execute();
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
@@ -95,7 +111,9 @@ class produits extends database{
         // Retourne $PDOResult
         return $isObjectResult;
     }
-
+/*
+ * 
+ */
     public function getProductsListByTypes() {
         $isObjectResult = array();
         $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
@@ -109,7 +127,9 @@ class produits extends database{
         // Retourne $PDOResult
         return $isObjectResult;
     }
-
+/*
+ * 
+ */
     public function getProductsListByCategories() {
         $isObjectResult = array();
         $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
@@ -123,22 +143,12 @@ class produits extends database{
         // Retourne $PDOResult
         return $isObjectResult;
     }
-    public function getProductsLists() {
-        $isObjectResult = array();
-        $PDOResult = $this->db->prepare('SELECT `id_types`, `id_categories`, `title`' 
-                . ' FROM `DFD54Z_products`');
-        $PDOResult->execute();
-        // Vérifie que $PDOResult est un objet
-        if (is_object($PDOResult)) {
-            // Stocke la requête dans $PDOResult
-            $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
-        }
-        // Retourne $PDOResult
-        return $isObjectResult;
-    }
+/*
+ * Récupération des produits
+ */
     public function getProductsList() {
         $isObjectResult = array();
-        $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
+        $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`,`id_categories`,`id_types`'
                 . ' FROM `DFD54Z_products`');
         $PDOResult->execute();
         // Vérifie que $PDOResult est un objet
@@ -149,6 +159,25 @@ class produits extends database{
         // Retourne $PDOResult
         return $isObjectResult;
     }
+
+        public function getProductsListWithCategoriesAndTypes() {
+        $isObjectResult = array();
+        $PDOResult = $this->db->prepare('SELECT `DFD54Z_products`.`id` ,`DFD54Z_products`.`title`, `DFD54Z_products`.`price`, `DFD54Z_products`.`imgUrl`,`DFD54Z_products`.`id_categories`,`DFD54Z_products`.`id_types`,`DFD54Z_categories`.`categoryName` FROM `DFD54Z_products` '
+                . 'INNER JOIN `DFD54Z_categories` ON `DFD54Z_products`.`id_categories` = `DFD54Z_categories`.`id`');
+        $PDOResult->execute();
+        // Vérifie que $PDOResult est un objet
+        if (is_object($PDOResult)) {
+            // Stocke la requête dans $PDOResult
+            $isObjectResult = $PDOResult->fetchAll(PDO::FETCH_OBJ);
+        }
+        // Retourne $PDOResult
+        return $isObjectResult;
+    }
+
+    /*
+     * Methode permettant de modifier un produit.
+     */
+
     public function modifyProduct() {
         $query = 'UPDATE `DFD54Z_products` SET `title`= :title, `price`= :price,`imgUrl`= :imgUrl,`id_categories`= :category,`id_types`= :type WHERE `id` = :id;';
         $modifProduct = $this->db->prepare($query);
@@ -160,16 +189,19 @@ class produits extends database{
         $modifProduct->bindValue(':type', $this->id_types, PDO::PARAM_STR);
         return $modifProduct->execute();
     }
-        public function removeProduct() {
+
+    public function removeProduct() {
         $query = 'DELETE FROM `DFD54Z_products` WHERE `id` = :id';
         $remove = $this->db->prepare($query);
         $remove->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $remove->execute();
     }
+
     /**
      * Méthode destruct
      */
     public function __destruct() {
+        
     }
 
 }

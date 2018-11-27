@@ -6,7 +6,7 @@ $count++;
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Manga-World</title>
+        <title>Manga-Sell</title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width" />
@@ -31,15 +31,15 @@ $count++;
             <!-- Tête d'affiche -->
             <!--NavBar -->
             <div class="col-12">
-                <nav class="navbar navbar-expand-md ">
+                <nav class="navbar navbar-expand-md">
                     <img src="../assets/icon/images-ConvertImage.png" class="img-circle" id="Img1" />
                     <div class="navbar-header" >
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarNavDropdown" >
-                        <?php if (!isset($_SESSION['isConnect']) || isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 2) { ?>
+                    <?php if (!isset($_SESSION['isConnect']) || isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 2) { ?>
+                        <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown" >
                             <ul class="navbar-nav">
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="../index.php" id="accueil1">
@@ -51,9 +51,9 @@ $count++;
                                         Luminaire
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="../produits.php?cat=1&typ=1">Dragon Ball</a>
-                                        <a class="dropdown-item" href="../produits.php?cat=1&typ=2">Naruto</a>
-                                        <a class="dropdown-item" href="../produits.php?cat=1&typ=3">One piece</a>
+                                        <a class="dropdown-item" id="navBarFont" href="../produits.php?cat=1&typ=1">Dragon Ball</a>
+                                        <a class="dropdown-item" id="navBarFont" href="../produits.php?cat=1&typ=2">Naruto</a>
+                                        <a class="dropdown-item" id="navBarFont" href="../produits.php?cat=1&typ=3">One piece</a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -61,74 +61,86 @@ $count++;
                                         Figurine
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" href="../produits.php?cat=2&typ=1">Dragon Ball</a>
-                                        <a class="dropdown-item" href="../produits.php?cat=2&typ=2">Naruto</a>
-                                        <a class="dropdown-item" href="../produits.php?cat=2&typ=3">One Piece</a>
+                                        <a class="dropdown-item" id="navBarFont" href="../produits.php?cat=2&typ=1">Dragon Ball</a>
+                                        <a class="dropdown-item" id="navBarFont" href="../produits.php?cat=2&typ=2">Naruto</a>
+                                        <a class="dropdown-item" id="navBarFont" href="../produits.php?cat=2&typ=3">One Piece</a>
                                     </div>
                                 </li>
                             </ul>
-                        <?php } ?>
-                        </ul>
-                        <li>
-                            <?php if (!isset($_SESSION['isConnect'])) { ?>
-                                <ul class="navbar-nav"> 
-                                    <a class ="nav-link" href="../login.php"><?= NAV_CONNECT ?></a>
-                            </li>
-                            <li>
-                                <a class="nav-link logAndRegister" id="register" href="../register.php">
-                                    <?= REGISTER_TITLE ?>
-                                </a>
-                            </li>
+                        </div>
+                    <?php } ?>
+                    <?php if (!isset($_SESSION['isConnect'])) { ?>
+                        <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown" >
+                            <ul class="navbar-nav"> 
+                                <li>
+                                <a class ="nav-link" href="../login.php"><?= NAV_CONNECT ?></a>
+                                </li>
+                                <li>
+                                    <a class="nav-link logAndRegister" id="register" href="../register.php">
+                                        <?= REGISTER_TITLE ?>
+                                    </a>
+                                </li>
                             </ul>
-                        <?php } else if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 1 || isset($_SESSION['userType']) && $_SESSION['userType'] == 3) { ?>
+                        </div>
+                    <?php } else if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] != 2) { ?>
+                        <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown" >
                             <ul class="navbar-nav">                        
-
                                 <li class="nav-item dropdown">
                                     <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink"><?= NAV_WELCOME . $_SESSION['firstname'] ?></a>  
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" id="hrefColorPatient" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
-                                        <a class="dropdown-item" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
+                                        <a class="dropdown-item" id="navBarFont" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
+                                        <a class="dropdown-item" id="navBarFont" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
                                     </div>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink">Produits</a>  
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item"  id="hrefColorPatient" href="../newProducts.php">Ajout de produits</a>
-                                        <a class="dropdown-item"  id="hrefColorPatient" href="../changeAndDeleteProducts.php?searchPrdts">Modification et suppresion de produit</a>
+                                        <a class="dropdown-item"  id="navBarFont" href="../newProducts.php">Ajout de produits</a>
+                                        <a class="dropdown-item"  id="navBarFont" href="../changeAndDeleteProducts.php?searchPrdts">Modification et suppresion de produit</a>
                                     </div>
                                 </li>
                                 <li>
-                                    <a class="nav-link"  id="hrefColorPatient" href="../allProfils.php?searchPfl">Tout les profils</a>
+                                    <a class="nav-link" href="../allProfils.php?searchPfl">Tout les profils</a>
                                 </li>
                             </ul>
-                            <ul class="navbar-nav navbar-right"
-                                <?php if (isset($_GET['searchPrdts']) || isset($_GET['searchPfl'])) { ?>
-                                    <li class="nav-item">
-                                        <form method="POST" action="#">
-                                            <input type="text" placeholder="Rechercher" name="search" />
-                                            <button><i class="fa fa-search"></i></button>
-                                        </form>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        <?php } else { ?>
-                            <ul class="navbar-nav">                        
+                        </div>
+                        <?php if (isset($_GET['searchPrdts']) || isset($_GET['searchPfl'])) { ?>
+                            <form method="POST" action="#">
+                                <div class="card-body searchBar row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <input class="searchInput" type="text" placeholder="Rechercher" name="search" />
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fa fa-search"></i>
+                                    </div>
+                                </div>
+                            </form>
 
+                        <?php } ?>
+                    <?php } else { ?>
+                        <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown" >
+                            <ul class="navbar-nav">                  
                                 <li class="nav-item dropdown">
                                     <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink"><?= NAV_WELCOME . $_SESSION['firstname'] ?></a>  
                                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" id="hrefColorPatient" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
-                                        <a class="dropdown-item" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
+                                        <a class="dropdown-item" id="navBarFont" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
+                                        <a class="dropdown-item" id="navBarFont" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
                                     </div>
                                 </li>
                             </ul>
-                        <?php } ?>  
-                    </div>
+                        </div>
+                    <?php } ?>  
                     <?php if (isset($_GET['cat'])) { ?>
                         <form method="POST" action="#">
-                            <input type="text" placeholder="Rechercher" name="search" />
-                            <button><i class="fa fa-search"></i></button>
-                        </form>
+                            <div class="card-body searchBar row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <input class="searchInput" type="text" placeholder="Rechercher" name="search" />
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fa fa-search"></i>
+                                </div>
+                            </div>
+                        </form> 
                     <?php } ?>
                     <?php if (!isset($_SESSION['isConnect']) || isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 2) { ?>
                         <button type="button" class="btn grey" id="myBtn"><span class="fas fa-shopping-cart fa-2x"></span></button>

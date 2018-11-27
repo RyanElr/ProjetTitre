@@ -1,13 +1,18 @@
 <?php
 $mail = '';
 $message = '';
+$regexMail = '/^[A-z0-9._%+-]+[\@]{1}[A-z0-9.-]+[\.]{1}[A-z]{2,4}$/';
 $formError = array();
 // Vérification de l'adresse mail de connexion.
 if (isset($_POST['connect'])) {
-    if (!empty($_POST['mail'])) {
-        $mail = htmlspecialchars($_POST['mail']);
+        if (!empty($_POST['mail'])) {
+        if (preg_match($regexMail, $_POST['mail'])) {
+            $mail = htmlspecialchars($_POST['mail']);
+        } else {
+            $formError['mail'] = 'La saisie de votre mail est invalide';
+        }
     } else {
-        $formError['mail'] = 'Veuillez entrer votre adresse mail';
+        $formError['mail'] = 'Veuillez indiquer votre mail';
     }
 // Vérification du mot de passe de connexion.
     if (!empty($_POST['password'])) {
@@ -22,7 +27,6 @@ if (isset($_POST['connect'])) {
         if ($user->userConnection()) {
             if (password_verify($password, $user->password)) {
                 //Si la connexion s'est faite
-                $message = USER_CONNECTION_SUCCESS;
                 //On rempli la session avec les attributs de l'objet issus de l'hydratation
                 $_SESSION['mail'] = $user->mail;
                 $_SESSION['lastname'] = $user->lastname;
@@ -34,8 +38,11 @@ if (isset($_POST['connect'])) {
                 header('Location:index.php');
             }
             else {
-                $message = USER_CONNECTION_ERROR;
+                $message = USER_CONNECTION_FAIL;
             }
+        }
+        else {
+            $message = USER_CONNECTION_MAIL;
         }
     }
 }

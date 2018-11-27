@@ -62,7 +62,6 @@ if (isset($_POST['deliveryRegister'])) {
         } else {
             $message = 'Fail';
         }
-    var_dump($getDeliveryList);
     }
 }
 

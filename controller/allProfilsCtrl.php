@@ -11,9 +11,17 @@ if (isset($_POST['submit'])) {
 }
 if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 1) {
     $getAllUsersProfil = $user->getAllUsersProfilAsAdministrator();
+    if (isset($_POST['search'])){
+        $user->search = $_POST['search'];
+        $getAllUsersProfil = $user->searchUsers();
+    }
 }
 if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 3) {
     $getAllUsersProfil = $user->getAllUsersProfilAsModerator();
+    if (isset($_POST['search'])){
+        $user->search = $_POST['search'];
+        $getAllUsersProfil = $user->searchUsersAsModerator();
+    }
 }
 
 $regexNumber = '/^[0-9]+$/';
@@ -37,11 +45,6 @@ if (isset($_POST['modifRole'])) {
         if ($user->modifyRole()) {
             $message = 'Le rôle de l\'utilisateur a bien été modifier';
         }
-        header('Location:allProfils.php');
+        header('Location:allProfils.php?searchPfl');
     }
 }
-if (isset($_POST['search'])){
-    $user = new users();
-        $user->search = $_POST['search'];
-        $getAllUsersProfil = $user->searchUsers();
-    }
