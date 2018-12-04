@@ -1,4 +1,6 @@
-    <button type="button" class="btn grey" id="modifUser">Modifier</button>
+<div class="row">    
+<button type="button" class="col-12 btn" id="modifUser">Modifier</button>
+    </div>
     <div class="modal fade bd-example-modal-lg" id="userModifModal" role="dialog">
         <div class="modal-dialog modal-lg">
 

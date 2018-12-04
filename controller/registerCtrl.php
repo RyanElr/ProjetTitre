@@ -1,5 +1,5 @@
 <?php
-
+// Regex permettant la sécurisation du code
 $message = '';
 $regexPhoneNumber = '/^[0][1-9][0-9]{8}$/';
 $regexPostalCode = '/^[0-9]{5}$/';
@@ -82,13 +82,18 @@ if (isset($_POST['register'])) {
     }
     // Si tout le formulaire est correct , nous envoyons les données vers la base de données.
     if (count($formError) == 0) {
+        // Vérification si un utilisateur n'est pas déjà existant par rapport à son adresse mail
         $user->checkIfUserExist();
+        // Si il n'est pas existant on envoie dans la base de données
         if ($user->checkIfUserExist() == 0) {
+            // Si il y a un problème nous mettons un message d'erreur
             if (!$user->userRegister()) {
                 $formError['register'] = 'Il y a eu un problème';
-            } else {
+            } // Sinon nous les données ont bien été transmises à la base de données et on renvoie vers la page de connexion
+            else {
                 header('Location:login.php');
             }
+            //Si l'adresse mail est déjà dans la base de données , nous renvoyons une erreur expliquant que l'adresse mail est déjà utilisée
         } else {
             $message = 'Adresse mail déjà utilisée';
         }

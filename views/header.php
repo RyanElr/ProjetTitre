@@ -1,7 +1,5 @@
 <?php
 include_once 'controller/headerCtrl.php';
-$count = 0;
-$count++;
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +19,7 @@ $count++;
         <link href="https://fonts.googleapis.com/css?family=Merienda" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
         <!-- ICONE DE PAGE -->
-        <link rel="icon" href="../assets/icon/shirt-saiyan-is-coming-blanc-pour-homme-et-femme.jpg" />
+        <link rel="icon" href="../assets/icon/Saiyan.jpg" />
         <!-- FEUILLE DE STYLE -->
         <link rel="stylesheet" href="../assets/css/style.css" />
         <script src="../assets/js/script.js"></script>
@@ -67,22 +65,31 @@ $count++;
                                     </div>
                                 </li>
                             </ul>
+                            <?php if (!isset($_SESSION['isConnect'])) { ?>
+                                <ul class="navbar-nav navbar-right"> 
+                                    <li class="nav-item">
+                                        <a class ="nav-link" href="../login.php"><?= NAV_CONNECT ?></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link logAndRegister" id="register" href="../register.php">
+                                            <?= REGISTER_TITLE ?>
+                                        </a>
+                                    </li>
+                                </ul>
+                            <?php } else { ?>
+                                <ul class="navbar-nav navbar-right">                  
+                                    <li class="nav-item dropdown">
+                                        <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink"><?= NAV_WELCOME . $_SESSION['firstname'] ?></a>  
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" id="navBarFont" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
+                                            <a class="dropdown-item" id="navBarFont" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            <?php } ?>
                         </div>
-                    <?php } ?>
-                    <?php if (!isset($_SESSION['isConnect'])) { ?>
-                        <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown" >
-                            <ul class="navbar-nav"> 
-                                <li>
-                                <a class ="nav-link" href="../login.php"><?= NAV_CONNECT ?></a>
-                                </li>
-                                <li>
-                                    <a class="nav-link logAndRegister" id="register" href="../register.php">
-                                        <?= REGISTER_TITLE ?>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    <?php } else if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] != 2) { ?>
+                    <?php } else if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] != 2) {
+                        ?>
                         <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown" >
                             <ul class="navbar-nav">                        
                                 <li class="nav-item dropdown">
@@ -117,18 +124,6 @@ $count++;
                             </form>
 
                         <?php } ?>
-                    <?php } else { ?>
-                        <div class="collapse navbar-collapse mr-auto" id="navbarNavDropdown" >
-                            <ul class="navbar-nav">                  
-                                <li class="nav-item dropdown">
-                                    <a class = "nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="navbarDropdownMenuLink"><?= NAV_WELCOME . $_SESSION['firstname'] ?></a>  
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <a class="dropdown-item" id="navBarFont" href="../profil.php?id=<?= $_SESSION['id'] ?>"><?= NAV_PROFIL ?></a>
-                                        <a class="dropdown-item" id="navBarFont" href="<?= $_SERVER['PHP_SELF'] ?>?action=disconnect"><?= NAV_DISCONNECT ?></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
                     <?php } ?>  
                     <?php if (isset($_GET['cat'])) { ?>
                         <form method="POST" action="#">
@@ -144,8 +139,7 @@ $count++;
                     <?php } ?>
                     <?php if (!isset($_SESSION['isConnect']) || isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['userType'] == 2) { ?>
                         <button type="button" class="btn grey" id="myBtn"><span class="fas fa-shopping-cart fa-2x"></span></button>
-                        <span><?= $count ?></span>
-                    <?php } ?>
+                        <?php } ?>
                 </nav>
             </div>
         </div>

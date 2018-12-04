@@ -1,4 +1,6 @@
-    <button type="button" class ="btn btn-danger" id="removeUser">Supprimer le compte</button>
+<div class="row">    
+<button type="button" class ="col-12 btn btn-danger" id="deleteBtn">Supprimer le compte</button>
+</div>
     <div class="modal fade" id="userModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -13,9 +15,11 @@
                     <p>Êtes-vous sûr de vouloir supprimer votre compte?</p>                
                 </div>
                 <div class="modal-footer">
+                    <?php if(isset($_SESSION['isConnect'])) { ?>
                     <form method="POST" action="?idRemove=<?= $user->id ?> ?disconnect">
                         <input class="btn btn-danger" type="submit" value="Supprimer" name="submit" />
                     </form>
+                    <?php } ?>
                     <input type="submit" value="Annuler" data-dismiss="modal" />
                 </div>
             </div>

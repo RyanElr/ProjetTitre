@@ -1,7 +1,9 @@
 <?php
 
 $product = new produits();
+// Méthode permettant de prendre tout les produits celon leur catégorie et leur type
 $productList = $product->getProductsListWithCategoriesAndTypes();
+// Si on appuie sur le bouton qui permets de supprimer le produit
 if (isset($_POST['deleteProduct'])) {
 //Condition de vérification pour l'id
     if (isset($_GET['idRemove'])) {
@@ -13,11 +15,13 @@ if (isset($_POST['deleteProduct'])) {
         }
     }
 }
+// Paramètre d'URL permettant la recherche des produits par rapport à leur titre
 if (isset($_POST['search'])) {
     $product = new produits();
     $product->search = $_POST['search'];
     $productList = $product->searchProducts();
 }
+// Regex permettant la sécurisation
 $regexPhoneNumber = '/^[0][1-9][0-9]{8}$/';
 $regexPostalCode = '/^[0-9]{5}$/';
 $regexName = '/^[a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-]+$/';
@@ -30,9 +34,10 @@ $regexNumber = '/^[0-9]+$/';
 $regexNumberPrice = '/^[0-9]*.[0-9]{2}+$/';
 $formError = array();
 $mdpError = array();
+// Si l'on appuie sur le bouton ouvrant une modal de modification de produit
 if (isset($_POST['modifProduct'])) {
     $product->id = $_GET['idChange'];
-    // Vérification du numéro de téléphone celon la regex
+    // Vérification du titre celon la regex
     if (!empty($_POST['title'])) {
         if (preg_match($regexName, $_POST['title'])) {
             $product->title = htmlspecialchars($_POST['title']);
@@ -42,7 +47,7 @@ if (isset($_POST['modifProduct'])) {
     } else {
         $formError['title'] = 'Veuillez indiquer un titre';
     }
-    // Vérification du prénom celon la regex
+    // Vérification du prix celon la regex
     if (!empty($_POST['price'])) {
         if (preg_match($regexNumberPrice, $_POST['price'])) {
             $product->price = htmlspecialchars($_POST['price']);
@@ -52,7 +57,7 @@ if (isset($_POST['modifProduct'])) {
     } else {
         $formError['price'] = 'Veuillez indiquer votre prix';
     }
-    // Vérification de l'adresse postal celon la regex
+    // Vérification de l'image celon la regex
     if (!empty($_POST['imgUrl'])) {
         if (preg_match($regexImg, $_POST['imgUrl'])) {
             $product->imgUrl = htmlspecialchars($_POST['imgUrl']);
@@ -62,6 +67,7 @@ if (isset($_POST['modifProduct'])) {
     } else {
         $formError['imgUrl'] = 'Veuillez mettre une image';
     }
+    // Vérification du type celon la regex
     if (!empty($_POST['type'])) {
         if (preg_match($regexNumber, $_POST['type'])) {
             $product->id_types = htmlspecialchars($_POST['type']);
@@ -71,6 +77,7 @@ if (isset($_POST['modifProduct'])) {
     } else {
         $formError['type'] = 'Veuillez indiquer le type';
     }
+    // Vérification de la catégorie celon la regex
     if (!empty($_POST['category'])) {
         if (preg_match($regexNumber, $_POST['category'])) {
             $product->id_categories = htmlspecialchars($_POST['category']);
@@ -80,6 +87,7 @@ if (isset($_POST['modifProduct'])) {
     } else {
         $formError['category'] = 'Veuillez indiquer la catégorie';
     }
+    // Si le formulaire n'a aucune erreur nous permettons la modification du produit
     if (count($formError) == 0) {
         $modifProduct = $product->modifyProduct();
         if ($product->modifyProduct()) {

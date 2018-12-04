@@ -13,89 +13,10 @@ include'views/header.php';
                     <div class="card-body"><h2 class="card-text"><?= $products->title ?></h2></div>
                     <div class="card-body"><p class="card-text"><?= $products->categoryName ?></p></div>
                     <div class="card-body"><p class="card-text"><?= $products->price ?>€</p></div>
-                    <button type="button" class="col-12 btn btn-primary btn-md" data-toggle="modal" data-target="#modifProductModal<?= $products->id ?>"  name="modifProduct">Modification du produit</button>
-                    <div class="modal fade bd-example-modal-lg" id="modifProductModal<?= $products->id ?>" role="dialog">
-                        <div class="modal-dialog">
-
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Modification du produit</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="container-fluid">
-                                        <div class="row">
-                                            <form class="col-md-6" id="formModifUser" action="?idChange=<?= $products->id ?>" method="POST">
-                                                <div class="form-group col-md-6">
-                                                    <select name="category">
-                                                        <option disabled="Catégorie" selected>Catégorie</option>
-                                                        <option name="category" value="1" >Luminaire</option>
-                                                        <option name="category" value="2" >Figurine</option>
-                                                    </select>
-                                                </div>
-                                                <p class="text-danger"><?= isset($formError['category']) ? $formError['category'] : ''; ?></p>
-                                                <div class="form-group col-md-6">
-                                                    <select name="type">
-                                                        <option disabled="Type" selected>Type</option>
-                                                        <option name="type" value="<?= $products->id_types ?>" >Dragon Ball</option>
-                                                        <option name="type" value="<?= $products->id_types ?>" >Naruto</option>
-                                                        <option name="type" value="<?= $products->id_types ?>" >One Piece</option>
-                                                    </select>
-                                                </div>
-                                                <!--Phone Number input -->
-                                                <div class="form-group col-md-6">
-                                                    <label for="title">Titre</label>
-                                                    <input id="title" name="title" value="<?= $products->title ?>" />
-                                                    <p class="text-danger"><?= isset($formError['title']) ? $formError['title'] : ''; ?></p>
-                                                </div>
-
-                                                <!--Email input -->
-                                                <div class="form-group col-md-6">
-                                                    <label for="price">Prix</label>
-                                                    <input id="price" type="text" name="price" value="<?= $products->price ?>" />
-                                                    <p class="text-danger"><?= isset($formError['price']) ? $formError['price'] : ''; ?></p>
-                                                </div>
-                                                <div class="form-group col-md-6">
-                                                    <label for="imgUrl">Image : </label>
-                                                    <input id="imgUrl" type="file" name="imgUrl" value="<?= $products->imgUrl ?>" />
-                                                    <p class="text-danger"><?= isset($formError['imgUrl']) ? $formError['imgUrl'] : ''; ?></p>
-                                                </div>
-                                                <!--Email input -->
-                                                <input type="submit" class="btn btn-primary btn-md" id="btn-form" name="modifProduct" value="Modification du produit" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" id="deleteProduct" class=" col-12 btn btn-danger btn-md" data-toggle="modal" data-target="#deleteProductModal<?= $products->id ?>">Suppression du produit</button>
-                    <div class="modal fade"  id="deleteProductModal<?= $products->id ?>" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Suppression du produit</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Êtes-vous sûr de vouloir supprimer ce produit?</p>                
-                                </div>
-                                <div class="modal-footer">
-                                    <form method="POST" action="?idRemove=<?= $products->id ?>">
-                                        <input type="submit" class ="btn btn-danger" name="deleteProduct" value="Suppression du produit" />
-                                    </form>
-                                    <input type="submit" value="Annuler" data-dismiss="modal" />
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                    <button type="button" id="modifBtn" class="col-12 btn btn-primary btn-md" data-toggle="modal" data-target="#modifProductModal<?= $products->id ?>"  name="modifProduct">Modification du produit</button>
+                    <?php include 'modal/modalModifProduct.php' ?>
+                    <button type="button" id="deleteBtn" class=" col-12 btn btn-danger btn-md" data-toggle="modal" data-target="#deleteProductModal<?= $products->id ?>">Suppression du produit</button>
+                    <?php include 'modal/modalDeleteProduct.php' ?>
                 </div>
             <?php } ?> 
         </div>
@@ -108,7 +29,7 @@ include'views/header.php';
             </div>
         </div>
     </div> 
-<?php } ?>
 <?php include 'views/footer.php'; ?>
+<?php } ?>
 </body>
 </html>

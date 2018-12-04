@@ -3,6 +3,7 @@
 /**
  * Classe permettant de se connecter à la base de données MYSQL
  */
+
 class database {
 
     protected $db;

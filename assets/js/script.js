@@ -53,7 +53,7 @@ $(document).ready(function () {
     };
 
     function scrollFunction() {
-        if (document.documentElement.scrollTop > 700) {
+        if (document.documentElement.scrollTop > 700 && window.innerWidth > 1200) {
             document.getElementById("btn7").style.display = "block";
             var speed = 800;
         } else {

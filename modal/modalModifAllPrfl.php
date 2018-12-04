@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-default" id="modifUserType" data-toggle="modal" data-target="#userRoleModal<?= $usersProfil->id ?>">Modifier</button>
+
 <div class="modal fade bd-example-modal-lg" id="userRoleModal<?= $usersProfil->id ?>" role="dialog">
     <div class="modal-dialog">
 

@@ -46,11 +46,13 @@ class produits extends database {
      */
     public function searchProducts() {
         $result = array();
-        $remove = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl` FROM `DFD54Z_products` '
+        $search = $this->db->prepare('SELECT `p`.`id`, `p`.`title`, `p`.`price`, `p`.`imgUrl`, `c`.`categoryName` '
+                . 'FROM `DFD54Z_products` AS `p` '
+                . 'INNER JOIN `DFD54Z_categories` AS `c` ON `p`.`id_categories` = `c`.`id` '
                 . 'WHERE `title` LIKE :title');
-        $remove->bindValue(':title', '%' . $this->search . '%', PDO::PARAM_STR);
-        if ($remove->execute()) {
-            $result = $remove->fetchAll(PDO::FETCH_OBJ);
+        $search->bindValue(':title', '%' . $this->search . '%', PDO::PARAM_STR);
+        if ($search->execute()) {
+            $result = $search->fetchAll(PDO::FETCH_OBJ);
         }
         return $result;
     }
@@ -111,9 +113,11 @@ class produits extends database {
         // Retourne $PDOResult
         return $isObjectResult;
     }
-/*
- * 
- */
+
+    /*
+     *  Méthode permettant de récupérer le type d'un produit
+     */
+
     public function getProductsListByTypes() {
         $isObjectResult = array();
         $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
@@ -127,9 +131,11 @@ class produits extends database {
         // Retourne $PDOResult
         return $isObjectResult;
     }
-/*
- * 
- */
+
+    /*
+     * 
+     */
+
     public function getProductsListByCategories() {
         $isObjectResult = array();
         $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`'
@@ -143,9 +149,11 @@ class produits extends database {
         // Retourne $PDOResult
         return $isObjectResult;
     }
-/*
- * Récupération des produits
- */
+
+    /*
+     * Récupération des produits
+     */
+
     public function getProductsList() {
         $isObjectResult = array();
         $PDOResult = $this->db->prepare('SELECT `id`, `title`, `price`, `imgUrl`,`id_categories`,`id_types`'
@@ -160,10 +168,15 @@ class produits extends database {
         return $isObjectResult;
     }
 
-        public function getProductsListWithCategoriesAndTypes() {
+    /*
+     * Méthode permettant de récupérer la catégorie du produit et l'afficher pour la partie admin et modérateur
+     */
+
+    public function getProductsListWithCategoriesAndTypes() {
         $isObjectResult = array();
-        $PDOResult = $this->db->prepare('SELECT `DFD54Z_products`.`id` ,`DFD54Z_products`.`title`, `DFD54Z_products`.`price`, `DFD54Z_products`.`imgUrl`,`DFD54Z_products`.`id_categories`,`DFD54Z_products`.`id_types`,`DFD54Z_categories`.`categoryName` FROM `DFD54Z_products` '
-                . 'INNER JOIN `DFD54Z_categories` ON `DFD54Z_products`.`id_categories` = `DFD54Z_categories`.`id`');
+        $PDOResult = $this->db->prepare('SELECT `p`.`id` ,`p`.`title`, `p`.`price`, `p`.`imgUrl`,`p`.`id_categories`,`p`.`id_types`,`c`.`categoryName` '
+                . 'FROM `DFD54Z_products` AS `p` '
+                . 'INNER JOIN `DFD54Z_categories` AS `c` ON `p`.`id_categories` = `c`.`id`');
         $PDOResult->execute();
         // Vérifie que $PDOResult est un objet
         if (is_object($PDOResult)) {
@@ -179,7 +192,9 @@ class produits extends database {
      */
 
     public function modifyProduct() {
-        $query = 'UPDATE `DFD54Z_products` SET `title`= :title, `price`= :price,`imgUrl`= :imgUrl,`id_categories`= :category,`id_types`= :type WHERE `id` = :id;';
+        $query = 'UPDATE `DFD54Z_products` '
+                . 'SET `title`= :title, `price`= :price,`imgUrl`= :imgUrl,`id_categories`= :category,`id_types`= :type '
+                . 'WHERE `id` = :id;';
         $modifProduct = $this->db->prepare($query);
         $modifProduct->bindValue(':id', $this->id, PDO::PARAM_INT);
         $modifProduct->bindValue(':title', $this->title, PDO::PARAM_STR);
@@ -189,6 +204,10 @@ class produits extends database {
         $modifProduct->bindValue(':type', $this->id_types, PDO::PARAM_STR);
         return $modifProduct->execute();
     }
+
+    /*
+     * Méthode permettant de supprimer un produit.
+     */
 
     public function removeProduct() {
         $query = 'DELETE FROM `DFD54Z_products` WHERE `id` = :id';

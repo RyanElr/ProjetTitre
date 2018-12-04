@@ -1,7 +1,6 @@
 <?php
 session_start();
 include_once 'configuration.php';
-include_once 'model/model.php';
 include_once 'controller/newProductsCtrl.php';
 include_once 'views/header.php';
 ?>
@@ -45,5 +44,7 @@ if (isset($_SESSION['isConnect']) && isset($_SESSION['userType']) && $_SESSION['
             </div>
         </div>
     </div>
-<?php } ?>
 <?php include_once 'views/footer.php'; ?>
+<?php } ?>
+</body>
+</html> 

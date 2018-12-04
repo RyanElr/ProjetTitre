@@ -1,8 +1,17 @@
 <?php
-
+//On récupère l'id avec un paramettre d'URL
 if (!empty($_GET['id'])) {
+    // Si l'id du profil que l'on veut afficher n'est pas le même que celui de la session , on le renvoit sur l'id de la SESSION
+    //Celà évite que des personnes mal intentionnés puissent supprimer le compte d'une autre personne
+    if ($_GET['id'] != $_SESSION['id']) {
+        header('Location:profil.php?id=' . $_SESSION['id']);
+        exit;
+    }
+    //On instancie
     $user = new users();
+    //Le profil que l'on veut afficher est le profil demandé par rapport à la base de données
     $user->id = $_GET['id'];
+    //On instancie la méthode
     $userProfil = $user->getUserProfil();
 }
 if (isset($_POST['submit'])) {
@@ -20,6 +29,7 @@ if (isset($_POST['submit'])) {
         }
     }
 }
+//Regex permettant de sécurisé les inputs.
 $regexPhoneNumber = '/^[0][1-9][0-9]{8}$/';
 $regexPostalCode = '/^[0-9]{5}$/';
 $regexName = '/^[a-zA-Zàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\-]+$/';
@@ -30,6 +40,7 @@ $regexAddress = '/^[A-z\ 0-9\']+$/';
 $regexNumberLetter = '/^[0-9A-z]+$/';
 $formError = array();
 $mdpError = array();
+//Si on appuie sur le bouton modif user
 if (isset($_POST['modifUser'])) {
     $user = NEW users();
     $user->id = $_GET['id'];
@@ -53,6 +64,7 @@ if (isset($_POST['modifUser'])) {
     } else {
         $formError['mail'] = 'Veuillez indiquer votre mail';
     }
+    // Si il n'y a aucun erreur dans le formulaire, on permets la modification et on redirige vers l'index.
     if (count($formError) == 0) {
         $modifUser = $user->modifyUser();
         if ($user->modifyUser()) {
@@ -60,6 +72,7 @@ if (isset($_POST['modifUser'])) {
         }
     }
 }
+//Si on appuie sur le bouton modif password
 if (isset($_POST['modifPassword'])) {
     $hash = $user->password;
     // Vérification du mot de passe
@@ -71,6 +84,7 @@ if (isset($_POST['modifPassword'])) {
     } else {
         $mdpError['password'] = 'Veuillez vérifier votre mot de passe';
     }
+    // Si le formulaire n'a aucune erreur on permets la modification du password et on renvoie vers la page index
     if (count($mdpError) == 0) {
         $modifPassword = $user->modifyPassword();
         if ($user->modifyPassword()) {

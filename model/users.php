@@ -15,16 +15,20 @@ class users extends database {
     public $postalCode = '';
     public $userType = '';
 
+    /*
+     * Méthode magique permettant d'instancier la class par rapport à la base de données
+     */
+
     public function __construct() {
         parent::__construct();
         $this->dbConnect();
     }
 
-    /**
-     * Méthode permettant de faire la connexion de l'utilisateur
-     * @return boolean
+    /*
+     * Méthode permettant de regarder si une adresse mail est déjà utilisée
      */
-        public function checkIfUserExist(){
+
+    public function checkIfUserExist() {
         $state = false;
         $query = 'SELECT COUNT(`id`) AS `count` FROM `DFD54Z_users` WHERE `mail` = :mail';
         $result = $this->db->prepare($query);
@@ -35,6 +39,11 @@ class users extends database {
         }
         return $state;
     }
+
+    /*
+     * Méthode permettant de faire la connexion de l'utilisateur
+     */
+
     public function userConnection() {
         $state = false;
         $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `userType` FROM `DFD54Z_users` WHERE `mail` = :mail';
@@ -55,13 +64,10 @@ class users extends database {
         }
         return $state;
     }
-
-    /**
-     * 
+    /*
      * Prends l'id du patient pour afficher ses informations.
-     * 
-     * @return boolean
      */
+
     public function getUserProfil() {
         $state = false;
         $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `mail`, `userType`, DATE_FORMAT(birthdate, "%d/%m/%Y") AS birthdate FROM `DFD54Z_users` WHERE `id` = :id';
@@ -84,7 +90,9 @@ class users extends database {
         }
         return $state;
     }
-
+    /*
+     * Méthode permettant de récupérer les profils quand on est administrateur
+     */
     public function getAllUsersProfilAsAdministrator() {
 
         $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `mail`, `userType`,DATE_FORMAT(birthdate, "%d/%m/%Y") AS birthdate FROM `DFD54Z_users` '
@@ -97,7 +105,9 @@ class users extends database {
         }
         return $selectResult;
     }
-
+    /*
+     * Méthode permettant de récupérer les profils quand on est modérateur
+     */
     public function getAllUsersProfilAsModerator() {
         $query = 'SELECT `id`, `lastname`, `firstname`, `password`, `phone`, `mail`, `userType`,DATE_FORMAT(birthdate, "%d/%m/%Y") AS birthdate FROM `DFD54Z_users` '
                 . 'WHERE `userType` = 2';
@@ -110,14 +120,17 @@ class users extends database {
         return $selectResult;
     }
 
-    /**
+    /*
      * Méthode permettant l'enregistrement d'un utilisateur
-     * @return boolean
      */
+
     public function userRegister() {
+        //Préparation de la requête
         $query = 'INSERT INTO `DFD54Z_users`(`lastname`, `firstname`, `birthdate`,  `phone`, `mail`, `civility`, `password`, `userType`) '
                 . 'VALUES (:lastname, :firstname, :birthdate, :phone, :mail, :civility, :password, 2)';
+        //Je prépare ma requête en raison des marqueurs nominatifs
         $insertUsers = $this->db->prepare($query);
+        //Je bind mes values par sécurité
         $insertUsers->bindValue(':lastname', $this->lastname, PDO::PARAM_STR);
         $insertUsers->bindValue(':firstname', $this->firstname, PDO::PARAM_STR);
         $insertUsers->bindValue(':birthdate', $this->birthdate, PDO::PARAM_STR);
@@ -125,21 +138,32 @@ class users extends database {
         $insertUsers->bindValue(':mail', $this->mail, PDO::PARAM_STR);
         $insertUsers->bindValue(':civility', $this->civility, PDO::PARAM_STR);
         $insertUsers->bindValue(':password', $this->password, PDO::PARAM_STR);
+        //J'exécute ma requête une fois prête
         return $insertUsers->execute();
     }
+
+    /*
+     * Méthode permettant de rechercher un utilisateur quand on est administrateur
+     */
 
     public function searchUsers() {
         $result = array();
         $remove = $this->db->prepare('SELECT `id`, `lastname`, `firstname`, `userType` FROM `DFD54Z_users`'
                 . 'WHERE (`userType` = 2 OR `userType` = 3)  '
-                . 'AND (`lastname` LIKE :lastname OR `firstname` LIKE :firstname )');
+                . 'AND (`lastname` LIKE :lastname OR `firstname` LIKE :firstname OR `userType` LIKE :userType)');
         $remove->bindValue(':lastname', '%' . $this->search . '%', PDO::PARAM_STR);
         $remove->bindValue(':firstname', '%' . $this->search . '%', PDO::PARAM_STR);
+        $remove->bindValue(':userType', '%' . $this->search . '%', PDO::PARAM_STR);
         if ($remove->execute()) {
             $result = $remove->fetchAll(PDO::FETCH_OBJ);
         }
         return $result;
     }
+
+    /*
+     * Méthode permettant de rechercher un utilisateur quand on est modérateur
+     */
+
     public function searchUsersAsModerator() {
         $result = array();
         $remove = $this->db->prepare('SELECT `id`, `lastname`, `firstname`, `userType` FROM `DFD54Z_users`'
@@ -153,7 +177,7 @@ class users extends database {
     }
 
     /*
-     * Méthode permettant de modifier un utilisateur.
+     * Méthode permettant de modifier les coordonnées d'un utilisateur.
      */
 
     public function modifyUser() {
@@ -165,6 +189,10 @@ class users extends database {
         return $insertUsers->execute();
     }
 
+    /*
+     * Méthode permettant de modifier le mot de passe d'un utilisateur
+     */
+
     public function modifyPassword() {
         $query = 'UPDATE `DFD54Z_users` SET `password` = :password WHERE `id` = :id;';
         $insertUsers = $this->db->prepare($query);
@@ -172,6 +200,10 @@ class users extends database {
         $insertUsers->bindValue(':password', $this->password, PDO::PARAM_STR);
         return $insertUsers->execute();
     }
+
+    /*
+     * Méthode permettant de modifier le rôle d'un utilisateur (disponible que chez l'administrateur)
+     */
 
     public function modifyRole() {
         $query = 'UPDATE `DFD54Z_users` SET `userType` = :userType WHERE `id` = :id;';
@@ -195,5 +227,4 @@ class users extends database {
     public function __destruct() {
         
     }
-
 }
